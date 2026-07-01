@@ -128,8 +128,24 @@ if __name__=="__main__":
     main()
 #-----------------------------------------------
 #Q10 - Write a lambda function which accepts three number and return largest
+    
+def large(a,b,c):
+    if a>b and a>c:
+        return a
+    elif b>a and b>c:
+        return b
+    else:
+        return c
+def main():
+    a=int(input("Enter the 1st number: "))
+    b=int(input("Enter the 2nd number: "))
+    c=int(input("Enter the 3rd number: "))
 
+    m1=large(a,b,c)
+    print("Largest number is :",m1)
 
+if __name__=="__main__":
+    main()
 
 
 
