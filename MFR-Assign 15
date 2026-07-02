@@ -1,0 +1,168 @@
+# Q1-Write a lambda function using map which accept a list of numbers and returns a list of squares of each number.
+sqr=lambda no1:no1*no1
+
+def main():
+    a=int(input("Enter the number of elements: "))
+    b=list()
+
+    for i in range(1,a+1):
+        c=int(input())
+        b.append(c)
+    print(b)
+    s1=list(map(sqr,b))
+    print(s1)
+if __name__=="__main__":
+    main()
+
+#----------------------------------------------------------------------
+#Q2 - Write a lambda funtion using filter() which accepts a list of numbers and returns a list of even numbers.
+even=lambda no1:no1%2==0
+
+def main():
+    a=int(input("Enter the number of elements: "))
+    b=list()
+    for i in range(1,a+1):
+        c=int(input())
+        b.append(c)
+    print(b)
+    s1=list(filter(even,b))
+    print(s1)
+
+if __name__=="__main__":
+    main()
+
+#----------------------------------------------------------------------
+#Q3-Write a lambda funtion using filter() which accepts a list of numbers and returns a list of odd numbers.
+
+odd=lambda no1:no1%2!=0
+def main():
+    a=int(input("Enter the list of number to get list of odd number:"))
+    data=list()
+    for i in range(1,a+1):
+        c=int(input(f"Enter the {i} number:"))
+        data.append(c)
+    fdata=list(filter(odd,data))
+    print(fdata)
+
+if __name__=="__main__":
+    main()
+#-----------------------------------------------------------------------
+#Q4-Write a lambda function which accepts a list of numbers and return the addition of of elements
+from functools import reduce
+add=lambda no1,no2:no1+no2
+
+def main():
+    a=int(input("Enter the number of elements:"))
+    data=list()
+    for i in range(1,a+1):
+        c=int(input(f"Enter {i} number:"))
+        data.append(c)
+    rdata=reduce(add,data)
+    print(rdata)
+
+if __name__=="__main__":
+    main()
+#-----------------------------------------------------------------------
+#Q5-Write a lamda function using reduce() which accepts list of element and return maximum number
+from functools import reduce
+
+max1=lambda no1,no2: no1 if no1>no2 else no2
+def main():
+    a=int(input("Enter the list of elements:"))
+    data=list()
+    for i in range(1,a+1):
+        c=int(input(f"Enter the {i}:"))
+        data.append(c)
+    print(data)
+    rdata=reduce(max1,data)
+    print(rdata)
+
+if __name__=="__main__":
+    main()
+#-----------------------------------------------------------------------
+#Q6-Write a lamda function using reduce() which accepts list of element and return minimum number
+
+from functools import reduce
+mini=lambda no1,no2: no1 if no1<no2 else no2
+def main():
+    a=int(input("Enter the number of elements:"))
+    data=list()
+    for i in range(1,a+1):
+        b=int(input(f"Enter the {i} number:"))
+        data.append(b)
+    fdata=reduce(mini,data)
+    print("Minimum number is:",fdata)
+
+if __name__=="__main__":
+    main()
+#-----------------------------------------------------------------------
+#Q7-Write a lambda function using filter()which accepts list of string return a list of strings having length greater than 5
+large=lambda no1:len(no1)>=5
+def main():
+    a=int(input("Enter the number of strings:"))
+    data=list()
+    for i in range(1,a+1):         
+        c=input(f"Enter the {i} string:")
+        data.append(c)
+    print(data)
+    fdata=list(filter(large,data))
+    print(fdata)
+if __name__=="__main__":
+    main()
+#-----------------------------------------------------------------------
+#Q8-Write a lambda function using filter() which accept a list of numbers and return a list of number divisible by 3 and 5
+
+div=lambda no1:no1%3==0 and no1%5==0
+def main():
+    a=int(input("Enter the list of number:"))
+    data=list()
+    for i in range(1,a+1):
+        b=int(input(f"Enter the {i} number:"))
+        data.append(b)
+    print(data)
+    fdata=list(filter(div,data))
+    print(fdata)
+if __name__=="__main__":
+    main()
+
+#-----------------------------------------------------------------------
+#Q9-Write a lambda function using reduce() which accepts a list of numbers and returns the product of all elements.
+from functools import reduce
+
+prod=lambda no1,no2:no1*no2
+def main():
+    a=int(input("Enter the number of elements:"))
+    data=list()
+    for i in range(1,a+1):
+        b=int(input(f"Enter the {i} number:"))
+        data.append(b)
+    rdata=reduce(prod,data)
+    print(rdata)
+
+if __name__=="__main__":
+    main()
+#-----------------------------------------------------------------------
+#Q10-Write a lambda function using filter which accepts a list of number and return count of even number
+cnt=lambda no1:no1%2==0
+
+def main():
+    a=int(input("Enter the number of list:"))
+    data=list()
+    for i in range(1,a+1):
+        b=int(input(f"Enter the {i} number:"))
+        data.append(b)
+    print(data)
+    fdata=list(filter(cnt,data))
+    print(fdata)
+    print("Count of even number is:",len(fdata))
+              
+if __name__=="__main__":
+    main()
+
+
+
+
+
+
+
+
