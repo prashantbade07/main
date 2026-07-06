@@ -80,7 +80,7 @@ def main():
 
 if __name__=="__main__":
     main()
-
+#---------------------------------------------------------------------------------------
 # Q3-Write a program which accept N numbers from user and store it into list.Return minimum number from that list.
 def mini(no1):
     n1=no1[0]
@@ -103,7 +103,7 @@ def main():
 
 if __name__=="__main__":
     main()
-
+#---------------------------------------------------------------------------------------
 #Q4-Write a program which accept N numbers from user and store it into list. Accept one another number frim user and return frequency of that number from list.
 
 def cnt(srch,no):
@@ -126,6 +126,48 @@ def main():
 
 if __name__=="__main__":
     main()
+
+
+#--------------------------------------------------------------------------------
+#Q5-Write a program which accept N numbers from user and store it into list.
+Return addition of all prime numbers from list.Main python file accepts N numbers from user and pass each number to ChkPrime() function
+which is part  of our udf module named as Num. 
+Name of the function from main python file should be ListPrime().
+
+import Num
+def ListPrime(No1):
+    sum=0
+    for i in No1:
+        sum=sum+i
+    return sum
+
+def main():
+    value=int(input("Enter the number of elements:"))
+    data=list()
+    for i in range(value):
+        a=int(input(f"Enter the {i+1} element:"))
+        data.append(a)
+    print(data)
+    Ret1=Num.ChkPrime(data)
+    print(Ret1)
+    Ret2=ListPrime(Ret1)
+    print("Addition of Prime number is :",Ret2)
+if __name__=="__main__":
+    main()
+#--------------- Module ------------------
+def ChkPrime(val):
+    Ret=list()
+    for No1 in val:
+        count=0
+        for No2 in range(1,No1+1):
+            if No1%No2==0:
+                count=count+1
+        if count==2:
+            Ret.append(No1)
+    return Ret
+
+if __name__=="__main__":
+    ChkPrime()
 
 
 
