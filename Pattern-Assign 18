@@ -89,3 +89,31 @@ if __name__=="__main__":
 #---------------------------------------------------------------------------------------------
 #Q7-Write a program which accept number and return count of digit.
 
+def digit(no1):
+    length=len(str(no1))
+    return length
+
+def main():
+    a=int(input("Enter the number:"))
+    Ret=digit(a)
+    print("Count of Digit:",Ret)
+
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------------
+#Q8-Write a program which accept number from user and return addition of digit in that number.
+def digit(no1):
+     sum=0
+     data=str(no1)
+     for i in range(len(data)):
+        sum=sum+int(data[i])
+     return sum
+
+def main():
+    a=int(input("Enter the number:"))
+    Ret=digit(a)
+    print("Sum of Digit:",Ret)
+
+if __name__=="__main__":
+    main()
+
