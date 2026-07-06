@@ -1,0 +1,136 @@
+#Q1-Write a program which contains one function named as Fun().That function should display "Hello from Fun" on console.
+
+def Fun():
+    print("Hello from Fun")
+def main():
+     Fun()
+if __name__=="__main__":
+    main()
+
+#-------------------------------------------------------------------------------------------
+#Q2-Write a program which contains one function named ChkNum() which accept one parameter as number.If number is even then it should display
+"Even number" otherwise display "Odd number" on console.
+
+def ChkNum(number):
+     
+     if number%2==0:
+          print("Even number")
+     else:
+          print("Odd number")
+    
+def main():
+     value=int(input("Enter the number:"))
+     Ret=ChkNum(value)
+
+if __name__=="__main__":
+    main()
+#--------------------------------------------------------------------------------------------
+#Q3-Write a program which accept one number from user and written addition of that of numbers.
+
+def Add(no1,no2):
+     return  no1+no2
+
+def main():
+     v1=int(input("Enter the first number:"))
+     v2=int(input("Enter the second number"))
+     Ret=Add(v1,v2)
+     print("Addition is:",Ret)
+
+if __name__=="__main__":
+    main()
+#-----------------------------------------------------------------------------------------
+#Q4-Write a program which display 5 time Marvellous.
+def display():
+     for i in range(5):
+          print("Marvellous")
+         
+def main():
+     display()
+
+if __name__=="__main__":
+    main()
+#------------------------------------------------------------------------------------------
+#Q5-Write a program which dispaly 10 to 1
+def display():
+     for i in range(10,0,-1):
+          print(i, end=" ")
+         
+def main():
+     display()
+
+if __name__=="__main__":
+    main()
+#----------------------------------------------------------------------------------------
+#Q6-Write a program which accept one number and print positive or negative or zero.
+
+def display(no2):
+     if no2>0:
+          print("Positive number")
+     elif no2<0:
+          print("Negative number")
+     else:
+          print("Zero")
+         
+def main():
+     no1=int(input("Enter the number:"))
+     display(no1)
+
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------------
+#Q7-Write a program which accept one number from user and if divisible by 5 return true else false
+
+def display(no2):
+    if no2%5==0:
+          print("True")
+    else:
+         print("False")
+         
+def main():
+     no1=int(input("Enter the number:"))
+     display(no1)
+
+if __name__=="__main__":
+    main()
+#--------------------------------------------------------------------------------------------
+#Q8-Write a program which accept number and print that many of *.
+def display(no2):
+     print("* "*no2)
+       
+def main():
+     no1=int(input("Enter the number:"))
+     display(no1)
+
+if __name__=="__main__":
+    main()
+
+#------------------------------------------------------------------------------------------
+#Q9-Write a program which accept 10 even number.
+def main():
+    for i in range(2,22,2):
+        print(i,end=" ")
+
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------
+#Q10-Write a program which accept name from user and display length of its name.
+def main():
+    name=input("Enter the name:")
+    print(len(name))
+
+if __name__=="__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
