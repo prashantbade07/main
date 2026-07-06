@@ -1,0 +1,4 @@
+#Q1-Design a python application that creates two threads named Prime and NonPrime.
+#Both threads should accept a list of integers
+#The Prime threads should display all prime numbers from the list.
+#The NonPrime thread should display all non prime numbers from list.
