@@ -1,0 +1,91 @@
+#Q1-Write a program which accept one number and display below pattern.
+def pattern(No):
+    for i in range(No):
+        print("* "*No)
+
+def main():
+    value=int(input("Enter the name:"))
+    pattern(value)
+    
+if __name__=="__main__":
+    main()
+#-----------------------------------------------------------------------------------
+#Q2-Write a program which accept and return factorial of number.
+def fact(no1):
+    prd=1
+    for i in range(1,no1+1):
+        prd=prd*i
+    return prd
+
+def main():
+    value=int(input("Enter the name:"))
+    Ret=fact(value)
+    print(f"Factorial of {value} is:",Ret)
+   
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------
+#Q3-Write a program which accept one number and check prime number or not.
+def prime(No1):
+    cnt=0
+    for i in range(1,No1+1):
+            if No1%i==0:
+                cnt=cnt+1
+    if cnt==2:
+        return f"Prime number"
+    else:
+        return f"Not Prime number"
+
+def main():
+    value=int(input("Enter the number:"))
+    Ret=prime(value)
+    print(f"{value} is",Ret)
+if __name__=="__main__":
+    main()
+
+#-------------------------------------------------------------------------------------
+#Q4-Write a program which accept one number and display pattern.
+"""
+***
+**
+*
+"""
+def pattern(no1):
+    for i in range(no1,0,-1):
+        print("* "* i)
+def main():
+    val=int(input("Enter the number:"))
+    pattern(val)
+if __name__=="__main__":
+    main()
+#------------------------------------------------------------------------------------------
+#Q5-Write a program which accept one number and return pattern.
+def pattern(no1):
+    for i in range(1,no1+1):     # 1 2 3 4 5
+        for j in range(1,no1+1): # 1 2 3 4 5
+            print(j,end=" ")
+        print("")
+
+def main():
+    val=int(input("Enter the number:"))
+    pattern(val)
+
+if __name__=="__main__":
+    main()
+#-------------------------------------------------------------------------------------------
+#Q6-Write a program which accept one number and return pattern.
+def pattern(no1):
+    for i in range(1,no1+1):                # 1 
+            for j in range(1,i+1):          # 1 2
+                 print(j, end=" ")
+            print("")
+
+def main():
+    val=int(input("Enter the number:"))
+    pattern(val)
+
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------------
+#Q7-Write a program which accept number and return count of digit.
+
