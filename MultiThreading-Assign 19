@@ -2,3 +2,89 @@
 #Both threads should accept a list of integers
 #The Prime threads should display all prime numbers from the list.
 #The NonPrime thread should display all non prime numbers from list.
+import threading
+
+def ChkPrime(No):
+    cnt=0
+    prm=list()
+    for i in range(len(No)):
+        for j in range(1,No[i]+1):
+            if No[i]%j==0:
+                cnt=cnt+1
+        if cnt==2:
+            prm.append(No[i])
+        cnt=0
+    print("Prime number from list are:",prm)
+
+def ChkNonPrime(No):
+    cnt=0
+    nonprm=list()
+    for i in range(len(No)):
+        for j in range(1,No[i]+1):
+            if No[i]%j==0:
+                cnt=cnt+1
+        if cnt>2:
+            nonprm.append(No[i])
+        cnt=0
+    print("Non Prime number from list are:",nonprm)
+
+def main():
+    val=int(input("Enter the number of elements:"))
+    data=list()
+    for i in range(val):
+        a=int(input(f"Enter the {i+1} element:"))
+        data.append(a)
+    print(data)
+
+    Prime=threading.Thread(target=ChkPrime,args=(data,))
+    NonPrime=threading.Thread(target=ChkNonPrime,args=(data,))
+    Prime.start()
+    NonPrime.start()
+
+    Prime.join()
+    NonPrime.join()
+
+if __name__=="__main__":
+    main()
+
+#--------------------------------------------------------------------------------------------------
+#Q2- Design a python application that creates two thread
+# Thread 1 should calculate and display the maximum element from an list.
+# Thread 2 should calculate and display the minimum element from same list.
+# The list should be accepted from the user.
+
+import threading
+def max1(no1):
+    mx=no1[0]
+    for i in no1:
+        if mx<i:
+            mx=i
+    print("Maximum number is:",mx)
+    
+def mini(no1):
+    min=no1[0]
+    for i in no1:
+        if min>i:
+            min=i
+    print("Minimum number is:",min)  
+
+def main():
+    val=int(input("Enter the number of element:"))
+    data=list()
+
+    for no in range(val):
+        a=int(input(f"Enter the {no+1} element:"))
+        data.append(a)
+    print(data)
+
+    t1=threading.Thread(target=max1,args=(data,))
+    t2=threading.Thread(target=mini,args=(data,))
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
+
+if __name__=="__main__":
+    main()
