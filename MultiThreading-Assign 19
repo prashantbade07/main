@@ -88,3 +88,51 @@ def main():
 
 if __name__=="__main__":
     main()
+
+#------------------------------------------------------------------------------
+#Q3- Design a python application where multiple threads update a shared variable
+# Use a lock to avoid race condition
+#Each thread should increment the shared counter multiple times
+#Display the final value of the counter after all threads complete execution.
+#------------------------------------------------------------------------------
+
+#Q4- Design a python application that creates two threads
+# Thread 1 should compute the sum of elements from a list
+# Threads 2 should compute the product of elements from the same list
+# Return the result to the main thread and display them
+import threading
+def sum(No1,result,key):
+    Sum=0
+    for i in No1:
+        Sum=Sum+i
+    result[key]= Sum
+
+def product(No1,result,key):
+    prd=1
+    for i in No1:
+        prd=prd*i
+    result[key]=prd
+
+def main():
+    val=int(input("Enter the number of element:"))
+    data=list()
+
+    for no in range(val):
+        a=int(input(f"Enter the {no+1} element:"))
+        data.append(a)
+    print(data)
+    results={}
+
+    t1=threading.Thread(target=sum,args=(data,results,"sum"))
+    t2=threading.Thread(target=product,args=(data,results,"product"))
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
+    print("Sum:",results["sum"])
+    print("Product:",results["product"])
+
+if __name__=="__main__":
+    main()
