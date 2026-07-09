@@ -78,3 +78,39 @@ def main():
 if __name__=="__main__":
     main()
 #-------------------------------------------------------------------------------------------------------------------
+#Q4-Write a program that calculates
+# 1^5+2^5+3^5+4^5
+#Input=[100000,200000] Measure total execution time.
+
+import multiprocessing
+import os
+import time
+
+def expo(no1):
+    prd=0
+    for i in range(1,no1+1):
+        prd=i**5+prd
+    return prd
+def main():
+
+    data=list(map(int,input("Enter the numbers separated by space:").split()))
+    print(data)
+
+    start_time=time.perf_counter()
+    t1=multiprocessing.Pool()
+    ret=t1.map(expo,data)
+    t1.close()
+    t1.join()
+    end_time=time.perf_counter()
+    print(ret)
+    print(f"Time required is:{end_time-start_time:.4f} seconds")
+
+if __name__=="__main__":
+    main()
+
+
+
+
+
+
+
