@@ -112,3 +112,25 @@ if __name__=="__main__":
 #-------------------------------------------------------------------------------------------------------
 #Q5-Write a program that calculates factorial of multiple numbers simultaneously using multiproessing.Pool
 # Data=[10,15,20,25]
+import multiprocessing
+import os
+import time
+
+def fact(no1):
+    prd=1
+    print("Process ID:",os.getpid())
+    print("Input Number:",no1)
+    for i in range(1,no1+1):
+        prd=prd*i
+    print(f"Factorial of {no1}:",prd)                 
+        
+def main():
+    data=list(map(int,input("Enter the number of elements separated by space:").split()))
+
+    t1=multiprocessing.Pool()
+    ret=t1.map(fact,data)
+    t1.close()
+    t1.join()
+
+if __name__=="__main__":
+    main()
