@@ -1,0 +1,30 @@
+#Q1-Write a python program using multiprocessing.Pool to calculate the sum of all even numbers from 1 to N
+for every number from the given list.
+Data=[10000,200000,300000,400000]
+
+import multiprocessing
+import os
+import time
+
+
+def even(no1):
+    sum=0
+    print("Process ID:",os.getpid())
+    print("Input Number:",no1)
+    for i in range(2,no1+1,2):
+        sum=sum+i
+    #return sum
+    print(f"Sum of even number {no1}:",sum)
+
+def main():
+    data=list(map(int,input("Enter the number of elements separated by space:").split()))
+
+    t1=multiprocessing.Pool()
+    ret=t1.map(even,data)
+    t1.close()
+    t1.join()
+
+if __name__=="__main__":
+    main()
+
+#---------------------------------------------------------------------------------------------------------
