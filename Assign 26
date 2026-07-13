@@ -1,0 +1,58 @@
+class Demo:
+    Value=0
+    def __init__(self,a,b):
+        self.no1=a
+        self.no2=b
+
+    def Fun(self):
+        print(self.no1)
+        print(self.no2)
+
+    def Gun(self):
+        print(self.no1)
+        print(self.no2)
+
+obj1=Demo(11,20)
+obj2=Demo(51,101)
+
+obj1.Fun()
+obj2.Fun()
+
+
+#---------------------------------------------------------------------------------------------------------
+#Q2-class Circle:
+    PI=3.14
+    def __init__(self):
+        self.Radius=0.0
+        self.Area=0.0
+        self.Circumference=0.0
+
+    def Accept(self):
+        self.Radius=float(input("Enter the radius of circle:"))
+        #return self.Radius
+    def CalculateArea(self):
+        self.Area=Circle.PI*self.Radius*self.Radius
+       # return self.Area
+    def CalculateCircumference(self):
+        self.Circumference=2*Circle.PI*self.Radius
+       # return self.Circumference
+    
+    def display(self):
+        self.CalculateArea()
+        self.CalculateCircumference()
+        print("Radius is ",self.Radius)
+        print("Area is",self.Area)
+        print("Circumference is",self.Circumference)
+
+
+cobj=Circle()
+cobj.Accept()
+cobj.display()
+
+cobj1=Circle()
+cobj1.Accept()
+cobj1.display()
+
+
+obj1.Gun()
+obj2.Gun()
