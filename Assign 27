@@ -1,0 +1,59 @@
+#Q1
+class BookStore:
+    NoOfBooks=0
+    def __init__(self,Name,Author):
+        self.Name=Name
+        self.Author=Author
+        BookStore.NoOfBooks=BookStore.NoOfBooks+1
+
+    def display(self):
+        print(f"Bookname {self.Name} by Author {self.Author}.No of Books:{self.NoOfBooks}")
+
+obj1=BookStore("Linux System Programming","Robert Love")
+obj1.display()
+
+obj2=BookStore("C Programming","Dennis Ritchie")
+obj2.display()
+
+obj2=BookStore("Python","Guido Van Rossum")
+obj2.display()
+
+#---------------------------------------------------------------------------------------------
+#Q2-
+class BankAccount:
+    ROI=10.5
+    def __init__(self,Name,Amount):
+        self.Name=Name
+        self.Amount=Amount
+
+    def Display(self):
+        print(f"Account Holder name {self.Name} and Current Balance is {self.Amount}")
+
+    def Deposit(self):
+        balance=float(input("Enter the amount be deposited:"))
+        self.Amount=balance+self.Amount
+        print("Balance is ",self.Amount)
+
+    def Withdraw(self):
+        self.wth=int(input("Enter the amount to withdraw:"))
+        if self.wth<=self.Amount and self.wth>=0:
+            self.Amount=self.Amount-self.wth
+            print("Balance after withdraw is ",self.Amount)
+        else:
+            print("Insufficient Balance")
+
+    def CalculateInterest(self):
+        Interest=(self.Amount*BankAccount.ROI)/100 
+        print("Interest is",Interest)
+
+obj=BankAccount("ABC",10)
+obj.Display()
+obj.Deposit()
+obj.Withdraw()
+obj.CalculateInterest()
+
+obj1=BankAccount("ABCD",100)
+obj1.Display()
+obj1.Deposit()
+obj1.Withdraw()
+obj1.CalculateInterest()
