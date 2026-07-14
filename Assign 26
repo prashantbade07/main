@@ -56,3 +56,40 @@ cobj1.display()
 
 obj1.Gun()
 obj2.Gun()
+
+#-------------------------------------------------------------------------------------------------------------
+class Arithmetic:
+
+    def __init__(self):
+        self.value1=0
+        self.value2=0
+
+    def Accept(self):
+        self.value1=int(input("Enter the first number:"))
+        self.value2=int(input("Enter the second number:"))
+
+    def Addition(self):
+        return self.value1+self.value2
+
+    def Substraction(self):
+        return self.value1-self.value2
+    def Multiplication(self):
+        return self.value1*self.value2
+    def Division(self):
+        try:      
+            return self.value1/self.value2
+        except Exception as e:
+            print("2nd number is zero and error is ",e)      
+
+obj1=Arithmetic()
+obj1.Accept()
+ret1=obj1.Addition()
+print("Addition is ",ret1)
+ret2=obj1.Substraction()
+print("Substraction is",ret2)
+ret3=obj1.Multiplication()
+print("Multiplication is",ret3)
+ret4=obj1.Division()
+if ret4!=None:
+    print("Division is",ret4)
+    
