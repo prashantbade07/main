@@ -57,3 +57,72 @@ obj1.Display()
 obj1.Deposit()
 obj1.Withdraw()
 obj1.CalculateInterest()
+#-----------------------------------------------------------------------------------------------------------------
+#Q3-
+class Number:
+    def __init__(self):
+        self.value=int(input("Enter the number:"))
+
+    def ChkPrime(self):
+        cnt=0
+        for i in range(1,self.value+1):
+            if self.value%i==0:
+                cnt=cnt+1
+        if cnt==2:
+            return True
+        else:
+            return False
+        
+    def ChkPerfect(self):
+        cnt1=0
+        
+        for i in range(1,self.value):
+            if self.value%i==0:
+                cnt1=cnt1+i
+        if cnt1==self.value:
+            return True
+        else:
+            return False
+
+    def Factors(self):
+        fct=list()
+        for i in range(1,self.value+1):
+            if self.value%i==0:
+                fct.append(i)
+        return fct
+    
+    def SumFactors(self):
+        sum=0
+        for i in range(1,self.value+1):
+            if self.value%i==0:
+                sum=sum+i
+        return sum
+
+        
+obj=Number()
+
+ret1=obj.ChkPrime()
+print("Is Prime Number:",ret1)
+
+ret2=obj.ChkPerfect()
+print("Is Perfect Number:",ret2)
+
+ret3=obj.Factors()
+print("Foctors are",ret3)
+
+ret4=obj.SumFactors()
+print("Sum of factors is",ret4)
+        
+obj1=Number()
+
+ret1=obj1.ChkPrime()
+print("Is Prime Number:",ret1)
+
+ret2=obj1.ChkPerfect()
+print("Is Perfect Number:",ret2)
+
+ret3=obj1.Factors()
+print("Factors are",ret3)
+
+ret4=obj1.SumFactors()
+print("Sum of factors is",ret4)
