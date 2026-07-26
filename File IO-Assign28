@@ -61,6 +61,58 @@ def main():
 if __name__=="__main__":
     main()
 #---------------------------------------------------------------------------------------------------------
+Q4) Copy File Contents into Another File
+Problem Statement:  
+Write a program which accepts two file names from the user.
+
+First file is an existing file
+
+Second file is a new file
+
+Copy all contents from the first file into the second file.
+
+Input:  
+ABC.txt Demo.txt
+
+Expected Output:  
+Contents of ABC.txt copied into Demo.txt.
+
+import sys
+
+def main():
+    fobj=open(sys.argv[1],"r")
+    sobj=open(sys.argv[2],"w")
+    data=fobj.read()
+    sobj.write(data)
+    print("File is copied successfully")
+       
+if __name__=="__main__":
+    main()
+
+#------------------------------------------------------------------------------------------------------------
+#Q5-Search a Word in File
+Problem Statement:  
+Write a program which accepts a file name and a word from the user and checks whether that word is present in the file or not.
+
+Input:  
+Demo.txt Marvellous
+
+Expected Output:  
+Display whether the word Marvellous is found in Demo.txt or not.
+import sys
+
+def main():
+    fobj=open(sys.argv[1],"r")
+    data=fobj.read().split()
+    
+    if sys.argv[2] in data:
+        print(f"{sys.argv[2]} is found in {sys.argv[1]} file")
+     
+    else :
+        print(f"{sys.argv[2]} is not present")
+        
+if __name__=="__main__":
+    main()
 
 
 
