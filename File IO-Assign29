@@ -57,9 +57,64 @@ Input (Command Line):
 ABC.txt
 
 Expected Output:  
-Create 
+Create Demo.txt and copy contents of ABC.txt into Demo.txt.
 
+import sys
 
+def main():
+    fobj=open(sys.argv[1],"r")
+    sobj=open(sys.argv[2],"a")
+    data=fobj.read()
+    sobj.write(data +"\n")
+    print("File is copied successfully")
+    fobj.close() 
+    sobj.close() 
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------------------------------------
+
+Q4) Compare Two Files (Command Line)
+Problem Statement:  
+Write a program which accepts two file names through command line arguments and compares the contents of both files.
+
+If both files contain the same contents, display Success
+
+Otherwise display Failure
+
+Input (Command Line):  
+Demo.txt Hello.txt
+
+Expected Output:  
+Success OR Failure
+
+import hashlib
+import sys
+
+def Checksum(FileName):
+    fobj=open(FileName,"rb")
+    hobj=hashlib.md5()
+    Buffer=fobj.read(1024)
+    
+    while(len(Buffer)>0):
+        hobj.update(Buffer)
+        Buffer=fobj.read(1024)
+    fobj.close()
+    return hobj.hexdigest()
+    
+    
+def main():
+    fobj1=sys.argv[1]
+    cs1=Checksum(fobj1)
+    fobj2=sys.argv[2]
+    cs2=Checksum(fobj2)
+
+    if cs1==cs2:
+        print("Success")
+    else:
+        print("Failure")
+
+if __name__=="__main__":
+    main()
 
 
 
