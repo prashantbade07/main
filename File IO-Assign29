@@ -32,6 +32,34 @@ Demo.txt
 Expected Output:  
 Display contents of Demo.txt on console.
 
+import os
+
+def main():
+    file=input("Enter the file name to display the contents of file.")
+    fobj=os.path.exists(file)
+    
+    if fobj==True:
+        fobj=open(file,"r")
+        fdata=fobj.read()
+        print(fdata)
+    else:
+        print(f"{file} is not exists")
+        
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------------------------------------------
+Q3) Copy File Contents into a New File (Command Line)
+Problem Statement:  
+Write a program which accepts an existing file name through command line arguments, creates a new file named Demo.txt,
+and copies all contents from the given file into Demo.txt.
+
+Input (Command Line):  
+ABC.txt
+
+Expected Output:  
+Create 
+
+
 
 
 
