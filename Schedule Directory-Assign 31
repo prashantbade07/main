@@ -1,0 +1,52 @@
+1: Write a program that accepts:
+A message from the user
+A time interval in seconds
+Schedule the program to display the message repeatedly after the specified interval.
+Example input:
+Enter message: Jay Ganesh
+Enter interval in seconds: 5
+Expected output:
+Jay Ganesh
+every five seconds.
+
+import schedule
+import time
+
+def display(mess):
+    print(mess)
+
+def main():  
+    mess=input("Enter the message to display:")
+    interval=int(input("Enter the interval in seconds:"))
+    
+    schedule.every(interval).seconds.do(display,mess)
+    while(True):
+        schedule.run_pending()
+        time.sleep(10)
+
+if __name__=="__main__":
+    main()
+#----------------------------------------------------------------------------------------
+2: Create a function named:
+DisplayMessage(message)
+Schedule the function using:
+schedule.every(5).seconds.do(DisplayMessage, message)
+The message should be accepted from the user.
+
+import schedule
+import time
+
+def DisplayMessage(mess):
+    print(mess)
+
+def main():  
+    mess=input("Enter the message to display:")
+    
+    schedule.every(5).seconds.do(DisplayMessage,mess)
+    while(True):
+        schedule.run_pending()
+        time.sleep(10)
+
+if __name__=="__main__":
+    main()
+#-------------------------------------------------------------------------------
