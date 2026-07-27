@@ -120,7 +120,6 @@ Print Wrap up work every day at 6:00 PM.
 
 Both tasks should be handled by separate functions.
 
-
 import schedule
 import time
 import datetime
@@ -138,9 +137,56 @@ def main():
         schedule.run_pending()
         time.sleep(4*60*60)
     
-
 if __name__=="__main__":
     main()
+#--------------------------------------------------------------------------------------------------
+7: Write a Python program that performs a file backup every hour.
+The program should:
+
+Accept the source file path.
+
+Accept the destination directory path.
+
+Copy the source file to the destination directory.
+
+Add the current date and time to the backup filename.
+
+Write the backup operation details into:
+
+backup_log.txt
+
+Example backup filename:
+Data_25_07_2026_16_30_00.txt
+
+Example log entry:
+Backup completed successfully at 25-07-2026 04:30:00 PM
+
+import schedule
+import shutil
+import time
+import datetime
+import os
+def cpy(s,dest):
+
+    dt=datetime.datetime.now().strftime("%d-%m-%Y_%H_%M_%S")
+    fname=f"Data_{dt}.txt"
+    des=os.path.join(dest,fname)
+    shutil.copy(s,des)
+    print("File is copy to destination successfully")
+
+    data=open("back_log.txt","a")
+    data.write(f"Backup completed successfully at {dt}"+"\n")
+    data.close()
 
 
+def main():
+    source=r"path"
+    dest=r"path"
+
+    schedule.every(5).minutes.do(cpy,source,dest)
+    while(True):
+        schedule.run_pending()
+        time.sleep(1)
+if __name__=="__main__":
+    main()
 
