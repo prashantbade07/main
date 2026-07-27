@@ -116,5 +116,22 @@ def main():
 if __name__=="__main__":
     main()
 
+#------------------------------------------------------
+import sys
 
+def wcnt(fname,wname):
+    cnt=0
+    data=open(fname,"r")
+    data1=data.read().split()
+    for i in data1:
+        if wname==i:      
+            cnt=cnt+1
+    return cnt
+def main():
+    fobj=sys.argv[1]
+    wname=sys.argv[2]
+    Ret=wcnt(fobj,wname)
+    print(f"{wname} is present {Ret} times")
 
+if __name__=="__main__":
+    main()
