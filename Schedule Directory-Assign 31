@@ -149,4 +149,35 @@ def main():
 if __name__=="__main__":
     main()
 #-----------------------------------------------------------------------------------------------------------------------------
+6: Write a program that schedules the following messages:
+Monday at 9:00 AM: Start your weekly goals
+Wednesday at 5:00 PM: Review your weekly progress
+Friday at 6:00 PM: Weekly work completed
+schedule.every().monday.at(...)
+schedule.every().wednesday.at(...)
+schedule.every().friday.at(...)
 
+import schedule 
+import time
+import os
+
+def mon():
+    print("Start your weekly goals")
+
+def wed():
+    print("Review your weekly goals")
+    
+def tues():
+    print("Weekly work completed")  
+
+def main():
+    schedule.every().day.at("12:25").do(mon)
+    schedule.every().day.at("12:26").do(wed)
+    schedule.every().day.at("12:27").do(tues)
+
+    while(True):
+        schedule.run_pending()
+        time.sleep(10)
+
+if __name__=="__main__":
+    main()
