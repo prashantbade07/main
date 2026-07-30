@@ -73,3 +73,30 @@ if __name__=="__main__":
     main()  
 
 #------------------------------------------------------------------------------------------------------------
+3: Write a program that reads and displays the contents of a specified text file every minute.
+Handle the following conditions:
+File does not exist
+File is empty
+Permission is denied
+File cannot be opened
+
+#--------------------------------------------------------------------------------------------------------------
+4: Write a program that copies all .txt files from one directory to another every ten minutes.
+The program should:
+Accept source and destination directories
+Validate both directories
+Copy only .txt files
+Maintain a log of copied files
+Avoid terminating if one file cannot be copied
+
+
+
+#--------------------------------------------------------------------------------------------------------------
+5: Write a program that deletes all empty files from a specified directory every hour.
+The program should:
+Scan the directory recursively
+Detect files whose size is zero bytes
+Delete the empty files
+Store deleted file paths in a log file
+Handle permission errors
+Test the program only on a sample directory
