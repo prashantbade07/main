@@ -80,6 +80,27 @@ File is empty
 Permission is denied
 File cannot be opened
 
+import schedule
+import os
+
+def main():
+    fname="DirectoryCountLog2.txt"
+    print(os.path.exists(fname))
+    try:        
+        if os.path.exists(fname)==False:
+            print("File does not exists")        
+        else: 
+           if os.path.getsize(fname)==0:
+                print("File is empty")
+           else:
+               fobj=open(fname,"r")
+               rd=fobj.read()
+               print(rd)     
+    except Exception as e:
+        print("Exception is:",e)
+        
+if __name__=="__main__":
+    main()
 #--------------------------------------------------------------------------------------------------------------
 4: Write a program that copies all .txt files from one directory to another every ten minutes.
 The program should:
@@ -88,6 +109,7 @@ Validate both directories
 Copy only .txt files
 Maintain a log of copied files
 Avoid terminating if one file cannot be copied
+
 
 
 
