@@ -110,8 +110,46 @@ Copy only .txt files
 Maintain a log of copied files
 Avoid terminating if one file cannot be copied
 
+import schedule
+import time
+import shutil
+import os
+import sys
 
+def cpy(source,destination):
+    fname="FileLogStatus.txt"
+    
+    for file in os.listdir(source):
+        if file.endswith(".txt"):
+            src=os.path.join(source,file)
+            dst=os.path.join(destination,file)
+            try:
+                shutil.copy(src,dst)
+                a=open(fname,"a")
+                a.write("File name:"+file+"\n")
+                print("Files are copied")
+                
+            except Exception as E:
+                print("Exception is ",E)
 
+def main():
+    source=sys.argv[1]
+    destination=sys.argv[2]
+    
+    if len(sys.argv)<3:
+        print("Usage file name .py <source dir> <destination dir>")
+    if os.path.isdir(source)==False:
+        print(f"{source} is not directory")
+
+    if os.path.isdir(destination)==False:
+        print(f"{destination} is not directory")  
+
+    schedule.every(20).seconds.do(cpy,source,destination) 
+    while True:
+        schedule.run_pending()
+        time.sleep(10) 
+if __name__=="__main__":
+    main()
 
 #--------------------------------------------------------------------------------------------------------------
 5: Write a program that deletes all empty files from a specified directory every hour.
@@ -122,3 +160,35 @@ Delete the empty files
 Store deleted file paths in a log file
 Handle permission errors
 Test the program only on a sample directory
+
+import schedule
+import time
+import os
+import sys
+
+
+def scan(dir):
+    log="DeleteLogFile.txt"
+    fread=open(log,"a")
+    for file in os.listdir(dir):
+        fpath=os.path.join(dir,file)
+        try:
+            if os.path.isfile(fpath) and  os.path.getsize(fpath)==0:
+                print(fpath)
+                fread.write("Deleted file is "+os.path.abspath(file)+"\n")
+                os.remove(fpath)
+        except Exception as e:
+            print(e)
+    fread.close() 
+    print("Files are deleted with zero size")     
+
+def main():
+    dir=sys.argv[1]
+    schedule.every(30).seconds.do(scan,dir)
+    while(True):
+        schedule.run_pending()
+        time.sleep(10)
+        
+
+if __name__=="__main__":
+    main()
