@@ -1,0 +1,156 @@
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+Border="-"*40
+#---------------------------------------------------
+#Step 1 - Load the Data
+#---------------------------------------------------
+
+print(Border)
+print("Step 1 - Load the Data")
+print(Border)
+
+DataPath="student_performance_ml.csv"
+
+df=pd.read_csv(DataPath)
+print("Data Loaded Successfully")
+print("First 5 records are")
+print(df.head())
+print("Last 5 records are")
+print(df.tail())
+print("Total number of rows and columns are ",end="")
+print(df.shape)
+print("List of columns names are")
+print(df.columns)
+print("Data type of each columns")
+print(df.dtypes)
+
+#-------------------------------------------------
+# Q2- Write to display
+#--------------------------------------------------
+print(Border)
+print("Step 2 - Display the Data")
+print(Border)
+print("Total number of students in the dataset")
+print(len(df))
+print("How many students Passed")
+print((df["FinalResult"]==1).sum())
+print("How many students Failed")
+print((df["FinalResult"]==0).sum())
+
+#--------------------------------------------------
+#Q3 - Using pandas function calculate and display 
+#--------------------------------------------------
+print(Border)
+print("Step 3 - Using pandas function calculate and display")
+print(Border)
+print("Average Study Hours")
+print(round(df["StudyHours"].mean(),2))
+print("Average attendence")
+print(round(df["Attendance"].mean(),2))
+print("Maximum previous score")
+print(df["PreviousScore"].max())
+print("Minimum sleep hours")
+print(df["SleepHours"].min())
+
+#--------------------------------------------------
+#Q4 - 4. Use value_counts() to analyze the distribution of FinalResult.
+#   Calculate the percentage of Pass and Fail students.
+#  Is the dataset balanced? Justify your answer.
+ 
+#--------------------------------------------------
+print(Border)
+print("Step 4 - Use value_counts() to analyze the distribution of FinalResult.")
+print(Border)
+print(df["FinalResult"].value_counts())
+print("The percentage of Pass and Fail students")
+print(df["FinalResult"].value_counts(normalize=True)*100)
+print("Data is not balanced since percentage is not equally distributed")
+
+#----------------------------------------------------------------------------------
+#5. Based on the dataset values, analyze whether:
+# Higher StudyHours increase the chance of passing.
+# Higher Attendance improves FinalResult.
+# Write your observations in 4–5 lines.
+#----------------------------------------------------------------------------------
+
+Ret=df.groupby("FinalResult")[["StudyHours","Attendance"]].mean()
+print(Ret)
+print("Observation-Student who pass averagely studied almost 6 hours and also attendance is 85 % plus.")
+
+#-------------------------------------------------------------
+#6. Plot a histogram of StudyHours.
+#Explain what the distribution tells you
+#-------------------------------------------------------------
+
+plt.hist(df["StudyHours"],bins=10,color="green",edgecolor="black")
+plt.title("Student Performance")
+plt.xlabel("StudyHours")
+plt.ylabel("Number of students")
+plt.show()
+
+#---------------------------------------------------------------
+#Step 7. Create a scatter plot of:
+#StudyHours vs PreviousScore
+#--------------------------------------------------------------
+print("Step 7 - Create a scatter plot of:")
+
+plt.figure(figsize=(7,5))
+
+for sp in df["FinalResult"].unique():
+    temp=df[df["FinalResult"]==sp]
+    plt.scatter(temp["StudyHours"],temp["PreviousScore"],label=sp)
+plt.title("Student Study Hours vs PreviousScore")
+plt.legend()
+plt.xlabel("StudyHours")
+plt.ylabel("PreviousScore")
+plt.show()
+
+#-------------------------------------------------------------------
+#Step 8 - Boxplot for Attendance
+#-------------------------------------------------------------------
+print(Border)
+print("Step 8 - Boxplot for Attendance")
+print(Border)
+
+plt.boxplot([df["Attendance"],df["StudyHours"]],patch_artist=True)
+plt.title("Boxplot Attendance")
+plt.xlabel("StudyHours")
+plt.ylabel("Attedance $")
+plt.show()
+
+
+#-------------------------------------------------------------------
+#Step 9 - Create a relationship between Assignement completed and FinalResult
+#-------------------------------------------------------------------
+print(Border)
+print("Step 9 - Create a relationship between Assignement completed and FinalResult")
+print(Border)
+
+plt.figure(figsize=(7,5))
+
+
+plt.scatter(df["AssignmentsCompleted"],df["FinalResult"])
+plt.xlabel("AssignmentsCompleted")
+plt.ylabel("FinalResult")
+plt.title("AssignmentsCompleted vs FinalResult")
+plt.show()
+
+#-------------------------------------------------------------------
+#Step 10 - Create a relationship between SleepHours against FinalResult
+#-------------------------------------------------------------------
+print(Border)
+print("Step 10 - Create a relationship between Assignement completed and FinalResult")
+print(Border)
+
+plt.figure(figsize=(7,5))
+plt.scatter(df["SleepHours"],df["FinalResult"],color="purple")
+plt.xlabel("SleepHours")
+plt.ylabel("FinalResult")
+plt.title("Relationship between SleepHours against FinalResult")
+plt.show()
+print("People who sleep more than 6 hours have passed in the exam")
+
+
+
