@@ -1,0 +1,4 @@
+1. Import DecisionTreeClassifier from sklearn.  
+Create a model object and train it using fit().
+2. Use the trained model to predict results for X_test.  
+Display predicted values along with actual values.
