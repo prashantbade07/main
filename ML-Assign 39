@@ -2,3 +2,211 @@
 Create a model object and train it using fit().
 2. Use the trained model to predict results for X_test.  
 Display predicted values along with actual values.
+
+import pandas as pd
+
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score,confusion_matrix,ConfusionMatrixDisplay
+
+#----------------------------------------------------
+# Step 1 - Load the data.  
+#---------------------------------------------------
+
+Border="-"*40
+print(Border)
+print("Step 1 - Load the data.")
+print(Border)
+
+DataPath="student_performance_ml.csv"
+df=pd.read_csv(DataPath)
+print(df.head())
+
+#---------------------------------------------
+#Step 2 - Independent and Dependent Variable.
+#---------------------------------------------
+
+print(Border)
+print("Step 2 - Independent and Dependent Variable.")
+print(Border)
+
+feature_col=["StudyHours","Attendance","PreviousScore","AssignmentsCompleted","SleepHours"]
+X=df[feature_col]
+Y=df["FinalResult"]
+print(X.head())
+print(Y.head())
+#----------------------------------------------
+#Step 3 - Set Data for training and testing
+#----------------------------------------------
+print(Border)
+print("Step 3 - Set Data for training and testing")
+print(Border)
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.5,random_state=42)
+print("X:",X.shape)
+print("Y:",Y.shape)
+
+print("X_train:",X_train.shape)
+print("X_test:",X_test.shape)
+
+print("Y_train:",Y_train.shape)
+print("Y_test:",Y_test.shape)
+
+#----------------------------------------------
+# Step 4 - Build the model
+#----------------------------------------------
+print(Border)
+print("Step 4 - Build the model")
+print(Border)
+
+model=DecisionTreeClassifier(max_depth=5)
+print("Model gets created successfully")
+
+#----------------------------------------------
+#Step 5 - Train the model
+#1. Import DecisionTreeClassifier from sklearn.  
+#Create a model object and train it using fit().
+#----------------------------------------------
+print(Border)
+print("Step 5 - Train the model")
+print(Border)
+
+model.fit(X_train,Y_train)
+print("Model train successfully")
+
+#----------------------------------------------
+#Step 6 - Predict the results
+# Q2 -Use the trained model to predict results for X_test.  
+#Display predicted values along with actual values.
+#----------------------------------------------
+print(Border)
+print("Step 6 - Predict the results")
+print(Border)
+
+Y_pred=model.predict(X_test)
+print("Predicates Results are")
+print(X_test)
+print(Y_pred)
+print(Y_test)
+
+#---------------------------------------------------
+# 3. Calculate model accuracy using accuracy_score.  
+# Display the result in percentage format.
+#----------------------------------------------------
+
+print(Border)
+print("Q2 - Model accuracy using accuracy_score")
+print(Border)
+accuracy=accuracy_score(Y_test,Y_pred)
+
+print("Model accuracy is",accuracy*100)
+
+#--------------------------------------------------
+# 4. Generate confusion matrix using sklearn.  
+# Display it using ConfusionMatrixDisplay.
+#--------------------------------------------------
+print(Border)
+print("Q4 - ConfusionMatrixDisplay")
+print(Border)
+confusion=confusion_matrix(Y_pred,Y_test)
+print("Confusion metric is")
+con=ConfusionMatrixDisplay(confusion)
+con.plot()
+plt.show()
+print("True Positive - Model correctly predicated Pass for 7 students who pass actually")
+print("True Negative-Model correctly predicated Fail for 7 students who fail actually")
+print("False Positive- Model incorrectly predicated Pass for 1 student who actually failed")
+print("False Negative-Model incorrectly predicated fail for 0 student who actually pass")
+
+#---------------------------------------------------------------------------
+#5. Calculate:
+#Training accuracy
+#Testing accuracy
+#Compare both and comment whether the model is overfitting or underfitting.
+#----------------------------------------------------------------------------
+print(Border)
+print("Q5-Training and testing accuracy")
+print(Border)
+accuracy_train=model.score(X_train,Y_train)
+accuracy_test=model.score(X_test,Y_test)
+print("Training accuracy",accuracy_train)
+print("Testing accuracy",accuracy_test)
+#-------------------------------------------------------------------
+#6. Train three Decision Tree models with:
+#max_depth = 1
+#max_depth = 3
+#max_depth = None
+#Compare their testing accuracies and write your observations.
+#-------------------------------------------------------------------
+print(Border)
+print("Q6-Train three Decision Tree models with")
+print("max_depth = 1")
+print(Border)
+model1=DecisionTreeClassifier(max_depth=1)
+print("Model gets created successfully with max_depth=1")
+model1.fit(X_train,Y_train)
+print("Model trained")
+Y_pred1=model1.predict(X_test)
+accuracy_1=accuracy_score(Y_test,Y_pred1)
+print("Model accuracy with depth 1 ",accuracy_1*100)
+
+print(Border)
+print("max_depth = 3")
+print(Border)
+
+model1=DecisionTreeClassifier(max_depth=3)
+print("Model gets created successfully with max_depth=1")
+model1.fit(X_train,Y_train)
+print("Model trained")
+Y_pred1=model1.predict(X_test)
+accuracy_3=accuracy_score(Y_test,Y_pred1)
+print("Model accuracy with depth 3 ",accuracy_3*100)
+
+print(Border)
+print("max_depth = None")
+print(Border)
+
+model1=DecisionTreeClassifier(max_depth=None)
+print("Model gets created successfully with max_depth=None")
+model1.fit(X_train,Y_train)
+print("Model trained")
+Y_pred1=model1.predict(X_test)
+accuracy_1=accuracy_score(Y_test,Y_pred1)
+print("Model accuracy with depth none ",accuracy_1*100)
+
+#------------------------------------------------------------------
+print(Border)
+
+for depth in [1,3,None]:
+    model=DecisionTreeClassifier(max_depth=depth,random_state=42)
+    model=model.fit(X_train,Y_train)
+    Y_pred=model.predict(X_test)
+    print(f"Depth={depth}, Test Accuracy={accuracy_score(Y_pred,Y_test):.2f}")
+
+#----------------------------------------------------------------
+#7. Use the trained model to predict result for a student with:
+#StudyHours = 6
+#Attendance = 85
+#PreviousScore = 66
+#AssignmentsCompleted = 7
+#SleepHours = 7
+#Will the student Pass or Fail?
+#---------------------------------------------------------------
+
+student_data={
+    "StudyHours":[6],
+    "Attendance":[85],
+    "PreviousScore":[66],
+    "AssignmentsCompleted":[7],
+    "SleepHours":[7]
+    
+}
+df_test=pd.DataFrame(student_data)
+Y_pred_q7=model.predict(df_test)
+if Y_pred_q7==1:
+    print("Pass")
+else:
+    print("Fail")
+    
