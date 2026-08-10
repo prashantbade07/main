@@ -1,0 +1,110 @@
+1. After training the Decision Tree model, use:
+python - model.feature_importances_
+Display importance score of each feature.
+Which feature contributes the most in predicting FinalResult?
+Which feature contributes the least?
+
+import pandas as pd
+
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+def main():
+    border="-"*40
+#Step 1 - Load the data
+    print(border)
+    print("Step 1 - Load the data")
+    print(border)
+    DataPath="student_performance_ml.csv"
+    df=pd.read_csv(DataPath)
+    print(df.head())
+    
+    # Step 2 - Training and testing data
+    print(border)
+    print("Step 2 - Training and testing data")
+    print(border)
+    feature_list=["StudyHours", "Attendance",  "PreviousScore",  "AssignmentsCompleted",  "SleepHours"]
+    X=df[feature_list]
+    Y=df["FinalResult"]
+    
+    X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.5,random_state=42)
+    print("Data splitting done")
+    # Step 3 - Build the model
+    print(border)
+    print("Step 3 - Build the model")
+    print(border)
+    model=DecisionTreeClassifier(max_depth=5)
+    model.fit(X_train,Y_train)
+    md=model.feature_importances_
+    print("Q1-Important score of each features are:")
+    for name, imp in zip(feature_list,md):
+        print(f"{name}: {imp:.4f}")
+    print(df.corr())
+    print("Q2-Feature contribute the most in predicting Final Result.")# Changes everytime
+    print("Q3-Feature contribute the least.")
+    
+    Y_pred=model.predict(X_test)
+    acc1=accuracy_score(Y_test,Y_pred)
+    print(f"Accuracy is:{acc1*100:.2f}")
+    
+    #Step 2 - Remove the column sleep hours
+    print(border)
+    print("Q2 - Remove the column sleep hours")
+    print(border)
+    feature_list2=["StudyHours", "Attendance",  "PreviousScore",  "AssignmentsCompleted"]
+    X1=df[feature_list2]
+    Y1=df["FinalResult"]
+    
+    X1_train,X1_test,Y1_train,Y1_test=train_test_split(X1,Y1,test_size=0.5,random_state=42)
+    print("Data splitting done")
+    # Step 3 - Build the model
+    print(border)
+    print("Step 3 - Build the model")
+    print(border)
+    model=DecisionTreeClassifier(max_depth=5)
+    model.fit(X1_train,Y1_train)
+    Y_pred1=model.predict(X1_test)
+    acc2=accuracy_score(Y_pred,Y1_test)
+    print(f"Accuracy after removing Sleep Hours ,{acc2*100:.2f}")
+    print("There is no change in accuracy after removing sleep hours")
+    
+    #Step 3 - Train the model using only StudyHours and Attendance
+    
+    feature_list3=["StudyHours", "Attendance"]
+    X2=df[feature_list]
+    Y2=df["FinalResult"]
+       
+    X2_train,X2_test,Y2_train,Y2_test=train_test_split(X2,Y2,test_size=0.5,random_state=42)
+    print("Data splitting done")
+       # Step 3 - Build the model
+    print(border)
+    print("Step 3 - Build the model")
+    print(border)
+    model=DecisionTreeClassifier(max_depth=5)
+    model.fit(X2_train,Y2_train)
+    Y_pred1=model.predict(X2_test)
+    acc3=accuracy_score(Y_pred,Y2_test)
+    print(f"Accuracy after removing {acc3*100:.2f}")
+    print("Model still works fine there is no change.")
+    
+    #4. Create a new DataFrame with details of 5 new students.
+    #Use the trained model to predict their results.
+    #Display predictions clearly.        
+    print(border)
+    print("Q4-Create a new DataFrame with details of 5 new students.")
+    print(border)
+    
+    df4=pd.DataFrame({ 
+         "StudyHours": [5, 8, 3, 7, 6],
+    "Attendance": [80, 95, 60, 85, 75],
+    "PreviousScore": [65, 88, 50, 78, 70],
+    "AssignmentsCompleted": [6, 9, 4, 8, 7],
+    "SleepHours": [7, 8, 5, 8, 7]
+    })
+    
+    Y_pred4=model.predict(df4)
+    df4["Result"]=Y_pred4
+    print(df4)
+        
+if __name__=="__main__":
+    main()
