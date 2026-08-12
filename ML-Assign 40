@@ -7,8 +7,12 @@ Which feature contributes the least?
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier,plot_tree
+from sklearn.metrics import accuracy_score,confusion_matrix
+import matplotlib.pyplot  as plt
+
+
+
 def main():
     border="-"*40
 #Step 1 - Load the data
@@ -24,6 +28,7 @@ def main():
     print("Step 2 - Training and testing data")
     print(border)
     feature_list=["StudyHours", "Attendance",  "PreviousScore",  "AssignmentsCompleted",  "SleepHours"]
+
     X=df[feature_list]
     Y=df["FinalResult"]
     
@@ -105,6 +110,94 @@ def main():
     Y_pred4=model.predict(df4)
     df4["Result"]=Y_pred4
     print(df4)
+    #--------------------------------------------------------------------
+    #5. Without using accuracy_score, manually calculate accuracy:
+    #Verify whether it matches sklearn accuracy.
+    #--------------------------------------------------------------------
+
+    correct_sel=(Y_pred==Y_test)
+    print("Accuracy without using accuracy_score")
+    print(f"{(correct_sel.sum()/len(Y_test))*100}")
+    print(accuracy_score(Y_test,Y_pred)*100)
+    #---------------------------------------------------
+    #6. Identify students where:
+        #y_test != y_pred
+        #Display those rows.
+        #How many students were misclassified?
+        #What common pattern do you observe?
+    #---------------------------------------------------
+    print(border)
+    print("y_test != y_pred")
+    print(border)
+    mis=X_test[Y_pred!=Y_test]
+    print(mis)
+    
+    #---------------------------------------------------
+    # 7. Train model using:
+    #random_state = 0
+    #random_state = 10
+    #random_state = 42
+    #--------------------------------------------------
+    
+    for i in [0,10,42]:
+    
+        X5_train,X5_test,Y5_train,Y5_test=train_test_split(X,Y,test_size=0.5)
         
+        new_model=DecisionTreeClassifier(random_state=i)
+        new_model=new_model.fit(X5_train,Y5_train)
+        Y5_pred=new_model.predict(X5_test)
+        print(f"Accuracy of model with random state {i} is { accuracy_score(Y5_pred,Y5_test) * 100:.2f}%")
+    print("Observation for 1 st run highest accuracy was for 42 and 2nd run accuracy remain same 93%")  
+    
+#--------------------------------------------------------------------   
+    # 8. Decision Tree Visualization
+    #from sklearn.tree import plot_tree
+    #Visualize the trained decision tree.
+    #Which feature appears at the root node?
+    #Why do you think that feature was selected first?
+#---------------------------------------------------------------------
+    plt.figure(figsize=(7,5))
+    plot_tree(model,feature_names=feature_list,filled=True, class_names=["Fail","Pass"])
+    plt.show()
+#---------------------------------------------------------------------
+#9. Create a new column:
+#PerformanceIndex = (StudyHours * 2) + Attendance
+#Train the model including this new feature.
+#Does accuracy improve?
+#---------------------------------------------------------------------
+    df["PerformanceIndex"]=(df["StudyHours"]*2 +df["Attendance"])
+    print(df.head())
+    
+    X_new=df[["StudyHours", "Attendance",  "PreviousScore",  "AssignmentsCompleted", "SleepHours","PerformanceIndex"]]
+    Y_new=df["FinalResult"]
+
+    
+    X_train_new,X_test_new,Y_train_new,Y_test_new=train_test_split(X_new,Y_new,test_size=0.5,random_state=42)
+    model_new=DecisionTreeClassifier()
+    model_new.fit(X_train_new,Y_train_new)
+    Y_pred_new=model_new.predict(X_test_new)
+    print(f"Accuracy of new model {accuracy_score(Y_test_new,Y_pred_new) * 100 : .2f} ")
+    print("There is no change in accuracy")
+
+#----------------------------------------------------------------------
+#10. Train model with:
+#max_depth = None
+#Calculate:
+#Training accuracy
+#Testing accuracy
+#If training accuracy is 100% but testing accuracy is lower, explain why this happens.  
+#---------------------------------------------------------------------
+    X_train_new,X_test_new,Y_train_new,Y_test_new=train_test_split(X_new,Y_new,test_size=0.5,random_state=42)
+    model_new=DecisionTreeClassifier(max_depth=None)
+    model_new.fit(X_train_new,Y_train_new)
+    Y_pred_train=model_new.predict(X_train_new)
+    Y_pred_new=model_new.predict(X_test_new)
+    print(f"Accuracy of new model training {accuracy_score(Y_pred_train,Y_train_new) * 100 : .2f} ")
+
+    print(f"Accuracy of new model testing {accuracy_score(Y_test_new,Y_pred_new) * 100 : .2f} ")
+    print("Training accuracy is 100% since model was train on training data and already knows the output. But this is not possible in case of testing data")
+
+   
 if __name__=="__main__":
     main()
+    
