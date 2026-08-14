@@ -1,0 +1,105 @@
+Wine Dataset Description
+These data are the results of a chemical analysis of wines grown in the same region in Italy but derived from three different cultivars. The analysis determined the quantities of 13 constituents found in each of the three types of wines.
+Wine dataset contains 13 features:
+Alcohol
+Malic acid
+Ash
+Alcalinity of ash
+Magnesium
+Total phenols
+Flavanoids
+Nonflavanoid phenols
+Proanthocyanins
+Color intensity
+Hue
+OD280/OD315 of diluted wines
+Proline
+According to the above features, wine can be classified as:
+• Class 1
+• Class 2
+• Class 3
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score,confusion_matrix
+from sklearn.preprocessing import StandardScaler
+
+Border="-"*40
+def main():
+#-----------------------------------------------
+# Step 1 - Data Load
+#-----------------------------------------------
+    print(Border)
+    print("Step 1 - Data Load")
+    print(Border)
+    DataPath="WinePredictor.csv"
+    df=pd.read_csv(DataPath)
+    print(df.head())
+    print(df.shape)
+#-----------------------------------------------
+# Step 2 - Clean Prepare and Manipulate Data
+#-----------------------------------------------  
+    print(Border)
+    print("Step 2 - Clean Prepare and Manipulate Data")
+    print(Border)
+    df.dropna(inplace=True)
+    print("Shape of Dataset:",df.shape)
+    print("Total records are:",df.shape[0])
+    print("Total columns are:",df.shape[1])
+#-----------------------------------------------
+# Step 3 - Decide the Independent and Dependent Variables
+#-----------------------------------------------  
+    print(Border)
+    print("Step 3 - Decide the Independent and Dependent Variables")
+    print(Border)
+    X=df.drop(columns=["Class"])
+    Y=df["Class"]
+    print("Shape of X:",X.shape)
+    print("Shape of Y:",Y.shape)
+    print("Distinct value count of class columns are:\n",Y.value_counts())
+    print("Input columns are:",df.columns.to_list())
+    print("Output column is: Class")
+#-----------------------------------------------    
+# Step 4 - Split the data for training and testing the model
+#-----------------------------------------------  
+    print(Border)
+    print("Step 4 - Split the data for training and testing the model")
+    print(Border)
+    X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.5,random_state=42)
+    print("Details of training and testing data")
+    print("Shape of X_train",X_train.shape)
+    print("Shape of X_test",X_test.shape)
+    print("Shape of Y_train",Y_train.shape)
+    print("Shape of Y_test",Y_test.shape)
+    
+#-----------------------------------------------    
+# Step 5 - Train the model
+#-----------------------------------------------  
+    print(Border)
+    print("Step 5 - Train the model")
+    print(Border) 
+    model=DecisionTreeClassifier()
+    model=model.fit(X_train,Y_train) 
+    Y_pred=model.predict(X_test)
+    accuracy=accuracy_score(Y_test,Y_pred)
+    print(f"Accuracy of model is:{accuracy*100 : .2f} ")
+    
+#-----------------------------------------------    
+#  Feature Scaling to get accurate results
+#-----------------------------------------------  
+    print(Border)
+    print("Feature Scaling to get accurate results")
+    print(Border) 
+    scaler=StandardScaler()
+    X_train_scaled=scaler.fit_transform(X_train)
+    X_test_scaled=scaler.fit_transform(X_test)
+    model_scaled=DecisionTreeClassifier()
+    model_scaled.fit(X_train_scaled,Y_train)
+    Y_pred_sc=model_scaled.predict(X_test_scaled)
+    print(f"Accuracy of scaled model is:{accuracy_score(Y_pred_sc,Y_test)*100 :.2f}"  )
+    
+    conf=confusion_matrix(Y_pred_sc,Y_test)
+    print(conf)
+if __name__=="__main__":
+    main()
