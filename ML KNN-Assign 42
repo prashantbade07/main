@@ -1,0 +1,175 @@
+1. Write a Python program that classifies a new data point using the K‑Nearest Neighbors algorithm.  
+The algorithm should be implemented manually without using any machine learning library.
+The program should:
+Calculate Euclidean distance
+Sort distances
+Select K nearest neighbors
+Predict the class based on majority voting
+Dataset
+Point	X	Y	Label
+A	1	2	Red
+B	2	3	Red
+C	3	1	Blue
+D	6	5	Blue
+Tasks
+1.Accept X and Y coordinates of a new point from the user.
+2.Compute Euclidean distance from all dataset points.
+3.Sort the distances.
+4.Select K = 3 nearest neighbors.
+5.Predict the class label.
+
+Input Format
+Enter X coordinate: 2
+Enter Y coordinate: 2
+
+Expected Output
+Nearest Neighbors:
+A – Distance: 1.0
+B – Distance: 1.0
+C – Distance: 1.41
+
+Predicted Class: Red
+
+import numpy as np
+import math
+
+def Euclidean(P1,P2):
+    ans=math.sqrt((P1["X"]-P2["X"])**2+(P1["Y"]-P2["Y"])**2)
+    return round(ans,2)
+def main():
+    Border="-"*50
+    #----------------------------------------------------------------
+    #Step 1 - Load the Data
+    #----------------------------------------------------------------
+    print(Border)
+    print("Step 1 - Load the Data")
+    print(Border)
+    Data=[
+        {"Point":"A","X":1,"Y":2,"Label":"Red"},
+        {"Point":"B","X":2,"Y":3,"Label":"Red"},
+        {"Point":"C","X":3,"Y":1,"Label":"Blue"},
+        {"Point":"D","X":6,"Y":5,"Label":"Blue"},      
+        {"Point":"E","X":7,"Y":6,"Label":"Red"} ,     
+        {"Point":"F","X":8,"Y":6,"Label":"Blue"} ,     
+        {"Point":"G","X":6,"Y":8,"Label":"Red"}      
+
+    ]
+    X=int(input("Enter the X co-ordinate:"))
+    Y=int(input("Enter the Y co-ordinate:"))
+    for i in Data:
+        print(i) 
+    new_point={"X":X,"Y":Y}
+    print(new_point)
+     #----------------------------------------------------------------
+    #Step 2 - Compute the Euclidean distance
+    #----------------------------------------------------------------
+    print(Border)
+    print("Step 2 - Compute the Euclidean distance")
+    print(Border)   
+    for d in Data:
+        d["distance"]=Euclidean(d,new_point)
+        print(d)
+    #----------------------------------------------------------------
+    #Step 3 - Sort Euclidean distance
+    #----------------------------------------------------------------
+    print(Border)
+    print("Step 3 - Sort Euclidean distance")
+    print(Border) 
+    sorted_data=sorted(Data,key=lambda item:item["distance"])
+    print(sorted_data)
+    
+    #----------------------------------------------------------------
+    #Step 4 - Select K=3 nearest neighbours
+    #----------------------------------------------------------------
+    print(Border)
+    print("Step 4 - Select K=3 nearest neighbours")
+    print(Border) 
+    K=3
+    nearest=sorted_data[:3]    
+    for d in nearest:
+        print(d)       
+    #----------------------------------------------------------------
+    # Voting
+    #----------------------------------------------------------------    
+    vote={}
+    for n in nearest:
+        Label=n["Label"]   
+        vote[Label]=vote.get(Label,0)+1
+    print("Voting result is:") 
+    for d in vote:
+        print("Name:",d ,"Number of vote:", vote[d] )   
+    
+    #----------------------------------------------------------------
+    #Step 5 - Predict the value
+    #----------------------------------------------------------------
+    print(Border)
+    print("Step 5 - Predict the value")
+    print(Border)
+    mx=0
+    name=""
+    for i in vote:
+        if vote[i]>mx:
+            mx=vote[i]
+            name=i
+            
+    print("Predicated value is",name)
+    
+    #----------------------------------------------------------------
+    #Q2 - K=[1,3,5]
+    #----------------------------------------------------------------
+    print(Border)
+    print("For K value in [1,3,5]")
+    print(Border)
+    
+    imax2=0
+    name2=""
+    for k in range(1,6,2):
+        nearest_2=sorted_data[:k]        
+        # Voting
+        vote_2={}
+        for d in nearest_2:
+            print(d)
+            Label_2=d["Label"]
+            vote_2[Label_2]=vote_2.get(Label_2,0)+1
+        print(vote_2)  
+        # Predication
+        for d in vote_2:
+            if vote_2[d]>imax2:
+                imax2=vote_2[d]
+                name2=d
+        print(f"Predicated K={k} value is",name2)
+        
+
+if __name__=="__main__":
+    main()
+#------------------------------------------------------------------------------------------------------------
+# Q 3 - Use KNN to predict whether a student passes or fails based on study hours and attendance.
+Dataset
+Study Hours	Attendance	Result
+2	60	Fail
+5	80	Pass
+6	85	Pass
+1	50	Fail
+Tasks
+Accept input from user:
+Study hours
+Attendance percentage
+Apply KNN algorithm
+Predict whether the student Passes or Fails
+Input Example
+Enter Study Hours: 4
+Enter Attendance: 70
+
+Expected Output
+Predicted Result: Pass
+
+
+
+
+
+
+
+
+
+
+
