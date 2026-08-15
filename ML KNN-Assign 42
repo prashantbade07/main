@@ -164,7 +164,47 @@ Expected Output
 Predicted Result: Pass
 
 
+from sklearn.neighbors import KNeighborsClassifier
+import pandas as pd
 
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score,confusion_matrix
+#-----------------------------------------------------------------------------------------
+#Q3-Use KNN to predict whether a student passes or fail based on study hours and attendance
+#-----------------------------------------------------------------------------------------
+def main():
+    StudyData=[
+        {"StudyHours":2,"Attendance":60,"Result":"Fail"},
+        {"StudyHours":5,"Attendance":80,"Result":"Pass"},
+        {"StudyHours":6,"Attendance":85,"Result":"Pass"},
+        {"StudyHours":1,"Attendance":50,"Result":"Fail"} 
+        ]
+    StHr=int(input("Enter the Study Hours :"))
+    Attd=int(input("Enter the Attendance Percentage :"))
+    new_data_point={
+        "Study Hours":StHr,
+        "Attendance":Attd
+    }
+    
+    df=pd.DataFrame(StudyData)
+    #----------------------------------------------------------------------
+    #Independent and Dependent Variable
+    #----------------------------------------------------------------------
+    X=df.drop(columns=["Result"])
+    Y=df["Result"]
+
+    X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.4,random_state=42,stratify=Y)
+    #----------------------------------------------------------------------
+    # Build the KNN Model
+    #----------------------------------------------------------------------
+    model=KNeighborsClassifier(n_neighbors=1)
+    model.fit(X_train,Y_train)
+    Y_pred=model.predict(X_test)
+    accuracy=accuracy_score(Y_pred,Y_test)
+    print("Predication is",Y_pred)
+    print(accuracy)
+if __name__=="__main__":
+    main()
 
 
 
