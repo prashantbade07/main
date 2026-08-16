@@ -1,0 +1,74 @@
+from sklearn.preprocessing import LabelEncoder
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+import pandas as pd
+Border="-"*50
+def CheckAccuracy(X_train,X_test,Y_train,Y_test):
+    for i in range(1,11):
+        model1=KNeighborsClassifier(n_neighbors=i)
+        model1.fit(X_train,Y_train)
+        Y_pred=model1.predict(X_test)
+        print(f"Accuracy of model with k={i} is {accuracy_score(Y_pred,Y_test) * 100:.2f} ")
+def main():
+  
+    # Step 1 - Load the Data from relative path
+    DataPath="MarvellousInfosystems_PlayPredictor.csv"
+    print(Border)
+    print("Step 1 - Load the Data from relative path")
+    print(Border)
+    df=pd.read_csv(DataPath)
+    print(df.head())
+
+    # Step 2 - Clean ,Prepare and Manipulate the Data
+    print(Border)
+    print("Step 2 - Clean ,Prepare and Manipulate the Data")
+    print(Border)
+    print(df.columns.to_list())
+    X=df[['Wether', 'Temperature']]
+    feature=['Wether',"Temperature","Play"]
+    print("Feature Encoding")
+    for col in feature:
+        le=LabelEncoder()
+        df[col+"1"]=le.fit_transform(df[col]) 
+        
+    X1=df[["Wether1","Temperature1"]]
+    Y1=df["Play1"]
+    #------------------------------------------------
+    # Build the model
+    #-----------------------------------------------
+    print(Border)
+    print("Step 3 - Build the model")
+    print(Border)
+
+    model=KNeighborsClassifier(n_neighbors=3)
+    model.fit(X1,Y1)
+    X_test=pd.DataFrame([
+        [2,0],
+        
+        [1,2],
+        [0,1]
+    ],columns=["Wether1", "Temperature1"])
+    Y_test=[1,0,1]
+    Y_pred=model.predict(X_test)
+    print(Y_pred)
+    accuracy=accuracy_score(Y_test,Y_pred)
+    print(f"Accuracy of model: {accuracy *100: .2f} ")
+    
+    #-----------------------------------------------------------
+    #Spliting training and testing dataset
+    #-----------------------------------------------------------
+    print(Border)
+    print("Step 4 - Spliting training and testing dataset")
+    print(Border)
+    X_train,X_test,Y_train,Y_test=train_test_split(X1,Y1,train_size=0.5,random_state=42)
+    #----------------------------------------
+    # Step 5 - Calculate accuracy by changing the value of K
+    #------------------------------------------
+
+    print(Border)
+    print("Step 5 - Calculate accuracy by changing the value of K")
+    print(Border)
+    CheckAccuracy(X_train,X_test,Y_train,Y_test)
+if __name__=="__main__":
+    main()
