@@ -1,0 +1,101 @@
+Q1: Normalize the 'Math' scores using Min-Max scaling.  
+Q2: Create a gender column and perform one-hot encoding.  
+Q3: Group students by gender and calculate average marks.  
+Q4: Plot a pie chart of subject marks for 'Sagar'.  
+Q5: Add a new column 'Status' where students with total >= 250 are 'Pass', else 'Fail'.  
+Q6: Count how many students passed.  
+Q7: Export the final DataFrame to a CSV file.  
+Q8: Plot a histogram of math marks.  
+Q9: Rename 'Math' column to 'Mathematics'.  
+Q10: Plot a boxplot for English marks to check distribution and outliers.
+
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+def main():
+    border="-"*50
+    #Q1: Normalize the 'Math' scores using Min-Max scaling. 
+    data={
+    'Name': ['Amit', 'Sagar', 'Pooja'],
+    'Math': [85, 90, 78],
+    'Science': [92, 88, 80],
+    'English': [75, 85, 82]
+    }
+    df=pd.DataFrame(data)
+    df["Math_Normalised"]=(df["Math"]-df["Math"].min())/(df["Math"].max()-df["Math"].min())
+    print(df)
+    #----------------------------------
+    #scaler=MinMaxScaler()
+    #df["Math_Normalised1"]=scaler.fit_transform(df[["Math"]])
+    #print(df)
+    #----------------------------------
+    
+    #Q2: Create a gender column and perform one-hot encoding.
+    #
+    df["gender"]=["Male","Male","Female"]
+    #df=pd.get_dummies(df,columns=["gender"])
+    ohe=OneHotEncoder()
+    gender_encoded=ohe.fit_transform(df[["gender"]]).toarray()
+    df_gender=pd.DataFrame(gender_encoded,columns=ohe.get_feature_names_out(["gender"]))  
+    df_final=pd.concat([df,df_gender],axis=1) # new columns are added next to existing one 
+   # print(df_final)      
+    
+    #Q3: Group students by gender and calculate average marks.
+    
+    print(df_final.groupby("gender")[["Math", "Science", "English"]].mean())
+    
+    #Q4: Plot a pie chart of subject marks for 'Sagar'.
+    sagar_mark=df.loc[df["Name"]=="Sagar",["Math","Science","English"]]
+    marks= sagar_mark.values.flatten()
+    subject=sagar_mark.columns   
+    print(marks)
+    print(subject)
+    plt.pie(marks,labels=subject,autopct='%1.1f%%',startangle=90)
+    plt.title("Sagar subject marks")
+    plt.show()
+    print(border)
+    #Q5: Add a new column 'Status' where students with total >= 250 are 'Pass', else 'Fail'.  
+    print(border)
+    df["Total"]=df[["Math","Science","English"]].sum(axis=1)
+    df["Status"]=df["Total"].apply(lambda x:"Pass" if x>=250 else "Fail")
+    print(df)
+    print(border)
+    #Q6: Count how many students passed
+    print("Q6: Count how many students passed")
+    print(border)
+    print("Number of student pass are",len(df[df["Status"]=="Pass"]))
+    print(border)
+    #Q7: Export the final DataFrame to a CSV file.  
+    print(border)
+    print("Q7: Export the final DataFrame to a CSV file.")
+    import os
+    print("Current working directory:", os.getcwd())
+
+    df.to_csv("Student.csv",index=False)
+    print("File created sucessfully")
+    print(border)
+    #Q8: Plot a histogram of math marks.  
+    print(border)
+    plt.hist(df["Math"],bins=5,edgecolor="black")
+    plt.title("Math Marks")
+    plt.xlabel("Math")
+    plt.ylabel("Frequency")
+    plt.show()
+    print("Histogram plotted")
+    print(border)
+    #Q9: Rename 'Math' column to 'Mathematics'. 
+    print(border)
+    df=df.rename(columns={"Math":"Mathematics"})
+    print(df)
+    print(border)
+    #Q10: Plot a boxplot for English marks to check distribution and outliers.
+    print(border)
+    plt.boxplot(df["English"],patch_artist=True,boxprops=dict(facecolor="lightblue"))
+    plt.title("Box Plot for English")
+    plt.ylabel("Marks")
+    plt.show()
+if __name__=="__main__":
+    main()
