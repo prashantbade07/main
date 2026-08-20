@@ -1,5 +1,6 @@
 Q1: Create a DataFrame for student marks and print basic information like shape, columns, and data types.
 
+
 python
 data = {
     'Name': ['Amit', 'Sagar', 'Pooja'],
@@ -32,3 +33,95 @@ data2 = {
     'Science': [91, np.nan, 85]
 }
 Q10: Drop the 'English' column from original DataFrame.
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def main():
+    Border="-"*50
+    data = {
+        'Name':["Amit","Sagar","Pooja"],
+        'Math':[85,90,78],
+        'Science':[92,85,90],
+        'English':[75,85,82]
+    }
+    #Q1-Create a DataFrame for student marks and print basic information like shape, columns, and data types.
+    df=pd.DataFrame(data)
+    print(Border)
+    print("Shape of Data:",df.shape)
+    print("Columns are:",df.columns)
+    print("Datatype are:",df.dtypes)
+    print(Border)
+    #Q2-Use the DataFrame from Q1 and print descriptive statistics using .describe().
+    print(Border)
+    print("Descriptive stats are:",df.describe())
+    print(Border)
+    
+    #Q3-Add a new column 'Total' to the DataFrame as the sum of all subject marks.
+    print(Border)
+    df['Total']=df['Math']+df['English']+df['Science'].astype(int)
+    print(df)
+    print(Border)
+    
+    #Q4: Display students who scored more than 85 in Science.
+    print(Border)
+    a=df[df['Science'].astype(int)>85]
+    print(a["Name"])
+    print(Border)
+    
+    #Q5: Replace 'Pooja' with 'Puja' in the 'Name' column.
+    df["Name"]=df["Name"].replace("Pooja","Poja")
+    print(df)
+    # df["Name"]=df["Name"].apply(lambda x:"Pojja" if x =="Poja" else x)
+    # print(df)
+   
+    #Q6: Sort the DataFrame by 'Total' marks in descending order.
+    sorted_df=df.sort_values(by="Total",ascending=False)
+    print(sorted_df)
+    #Q7: Create a bar plot of student names vs total marks.
+    plt.figure(figsize=(7,5))
+    plt.bar(df["Name"],df["Total"],color='green')
+    plt.xlabel("Students")
+    plt.ylabel("Total Marks")
+    plt.title("Students vs Total Marks")
+    plt.show()
+    
+    #Q8: Plot a line chart of marks for 'Amit' across all subjects.
+    amit=df[df["Name"]=="Amit"].iloc[0]
+    mark=[]
+    subject=["Math",'Science','English']
+    for i in subject:
+        mark.append(amit[i])
+    mark=[ int(m) for m in mark]
+    print(mark)
+    plt.plot(subject,mark, marker='o',linestyle="-")
+    plt.xlabel("Amit")
+    plt.ylabel("Marks")
+    plt.title("Marks Obtained for Amit")
+    plt.show()
+    
+    #Q9 Create a DataFrame with missing values and fill them with column mean.
+
+    data2 = {
+        'Name': ['Amit', 'Sagar', 'Pooja'],
+        'Math': [np.nan, 76, 88],
+        'Science': [91, np.nan, 85]
+    }
+    
+    df2=pd.DataFrame(data2)
+    df2["Math"]=df2["Math"].fillna(
+        df2["Math"].mean()
+    )
+    df2["Science"]=df2["Science"].fillna(
+        df2["Science"].mean()
+    )
+    print(df2)
+    
+    #Q10: Drop the 'English' column from original DataFrame.
+    df=df.drop(columns=["English"])
+    print(df)
+    
+if __name__=="__main__":
+     main()
+     
