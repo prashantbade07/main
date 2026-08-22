@@ -1,0 +1,141 @@
+1. Explain in your own words what a coefficient represents in regression. Also give one simple real-life example where a coefficient explains the relationship between two variables.
+Ans-Coefficient represent the relation between Dependent and Independent Variable,its slope of line, if any 1 unit chages made to x how much it affect to y.
+For eg. Student CGPA and Package student got, y=mx+c
+#-------------------------------------------------------------------------------------
+2. Consider the regression model:
+g
+Y = 8X + 15
+
+Answer the following:
+
+Identify the coefficient and the intercept.
+Answer - Coefficent of 8 and intercept - 15
+Explain what the coefficient tells us about the relationship between X and Y.
+Ans - Coefficient tells if 1 unit changes in X Y change by 8 unit in this case.
+#-------------------------------------------------------------------------------------
+3. A regression model used to predict marks is:
+Marks = 6 × StudyHours + 40
+Explain the meaning of:
+The coefficient 6 - For every additional hours of study the predicated marks increases by 12 marks.
+
+The intercept 40
+Also explain what happens to the predicted marks if study hours increase by 2 hours.
+Ans- If study hour increases by 2 hours marks will increase by 12.
+
+#-------------------------------------------------------------------------------------
+4. A regression model is given as:
+Salary = 12 × Experience + 25
+Calculate the predicted salary for the following experience values:
+Experience (Years)	Predicted Salary
+2	? 
+5	?
+7	?
+Experience (Years)	Predicted Salary
+2	                        49
+5	                        85
+7	                        109
+
+#--------------------------------------------------------------------------------------
+5. Consider the regression equation:
+Y = -3X + 20
+Answer the following:
+What does the negative coefficient indicate?
+What happens to Y when X increases by 1?
+Calculate the value of Y when X = 4.
+
+Anser - Negative coefficient indicate inverse relationship bwteen X and Y, X increase Y decreases.
+If X increases by 1 Y decreases by 3 points
+Y=-3*4+20=8
+
+#--------------------------------------------------------------------------------------
+6. Suppose a regression model used to predict house price is:
+Price = 3000 × Size + 40000 × Bedrooms + 150000
+Explain the meaning of the coefficients of:
+Size  - For evry unit in size of house price increase by 3000
+Bedrooms - For evry unit increase in bedrooms, price increases by 40000
+According to the equation, which feature has a larger impact on the house price?
+Bedrooms contribute to price largest.
+#--------------------------------------------------------------------------------------
+7. Write a Python program using LinearRegression to train a regression model using the dataset below.
+Study Hours	Marks
+1	50
+2	55
+3	60
+4	65
+5	70
+Your program should:
+Train the regression model
+Print the coefficient
+Print the intercept
+#--------------------------------------------------------------------------------------
+8. Using the regression model created in the previous question, write a Python program to predict 
+marks for 6 study hours and display the predicted value.
+#--------------------------------------------------------------------------------------
+import pandas as pd
+import numpy as np 
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+def main():
+    data={
+        "Study Hours":[1,2,3,4,5],
+        "Marks":[50,55,60,65,70]
+    }
+    df=pd.DataFrame(data)
+    print(df)
+    x=df[["Study Hours"]]
+    y=df["Marks"]
+    X_train,X_test,Y_train,Y_test=train_test_split(x,y,random_state=42)
+    model=LinearRegression()
+    model.fit(X_train,Y_train)
+    Y_test=pd.DataFrame([[6]],columns=["Study Hours"])
+    Y_pred=model.predict(Y_test)
+    print("Predicated value is ",Y_pred[0])
+    print("Coefficient is:",model.coef_[0])
+    print("Intercept is:",model.intercept_)
+if __name__=="__main__":
+    main()
+#-------------------------------------------------------------------------------------------------
+9. Consider the dataset below:
+StudyHours	SleepHours	Marks
+1	7	50
+2	6	55
+3	7	60
+4	6	65
+5	8	70
+Write a Python program to:
+Train a regression model using this dataset
+Print the coefficients for both features
+Print the intercept
+
+import pandas as pd
+import numpy as np 
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+def main():
+    data={
+        "Study Hours":[1,2,3,4,5],
+        "SleepHours":[7,6,7,6,8],
+        "Marks":[50,55,60,65,70]
+    }
+    df=pd.DataFrame(data)
+    print(df)
+    x=df[["Study Hours","SleepHours"]]
+    y=df["Marks"]
+    X_train,X_test,Y_train,Y_test=train_test_split(x,y,random_state=42)
+    model=LinearRegression()
+    model.fit(X_train,Y_train)
+    Y_test=pd.DataFrame([[7,10]],columns=["Study Hours","SleepHours"])
+    Y_pred=model.predict(Y_test)
+    print("Predicated value is ",round(Y_pred[0],2))
+    print("Coefficient is:",round(model.coef_[0],2))
+    print("Intercept is:",round(model.intercept_,2))
+if __name__=="__main__":
+    main()
+#-------------------------------------------------------------------------------------------------
+10. Explain why coefficients are important in regression models.  
+Also explain how coefficients help in understanding the impact of input features on predictions.
+
+Coefficient are weight that tell the model how strongly each input contributes to the final prediction.They turn raw data into
+meaningful insights about each cause and effect.
+
