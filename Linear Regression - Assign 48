@@ -13,7 +13,9 @@ Experience	Salary
 #-----------------------------------------------------------------------------
 import pandas as pd
 import numpy as np
-
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+border="-"*50
 def main():
     X=[1,2,3,4,5]
     Y=[3,4,2,4,5]
@@ -27,7 +29,8 @@ def main():
     for i in Y:
         sum_y=sum_y+i
         
-    Mean_Y=sum_y/len(Y)   
+    Mean_Y=sum_y/len(Y) 
+    print(border)  
     print("Mean of X:",Mean_X)
     print("Mean of Y:",Mean_Y)
     
@@ -46,16 +49,17 @@ def main():
     print("Intercept is:",c)
     # Regression Equation
     print("y=0.4x+2.4")
-    
+    #--------------------------------------------------------------------   
     #Q2 - Using same Dataset calculate the model performance
     # Task 1- Predict all Y values  using regression equation , Mean Sqaure Error(MSE),R2 score 
-    
+    #--------------------------------------------------------------------
+   
     y_list=[]
     for i in range(n):
         y_list.append(m*X[i]+c)
     print("Actual Y values:",Y)
     print(y_list)
-    
+    print(border)
     #Mean square error
     print("Mean Square Error")
     
@@ -67,9 +71,75 @@ def main():
     a=sum((Y[i]-y_list[i])**2 for i in range(n))
     b=sum((Y[i]-Mean_Y)**2 for i in range(n)) 
     r2=a/b
-    print("R2 square is:",r2)                 
+    print("R2 square is:",r2)       
+    
+    #--------------------------------------------------------------------
+    #Q3- Train Liner Regression Model
+    #--------------------------------------------------------------------
+    Data={
+        "Experience":[1,2,3,4,5],
+        "Salary":[20000,25000,30000,35000,40000]
+    }
+    df=pd.DataFrame(Data)
+    print(border)
+    print(df)
+    print(border)
+    X=df[["Experience"]]
+    Y=df["Salary"]
+    model=LinearRegression()
+    model.fit(X,Y)
+    print("Model trained")
+    X_test=pd.DataFrame(
+    [6],columns=["Experience"])
+    Y_pred=model.predict(X_test)  
+    print("Predicted salary for 6 years of experience:",Y_pred) 
+      
+    #--------------------------------------------------------------------
+    # Q4 - Plot the regression line using matplotlib    
+    #--------------------------------------------------------------------
+    x=np.linspace(1,6,n)
+    plt.plot(x,y_list,color="g",label="Regression Line")
+    #plt.scatter(X,Y,color="r",label="Scatter Plot")
+    plt.xlabel("X:Independent Variable")
+    plt.ylabel("Y:Dependent Variable")
+    plt.legend()
+    plt.show()
+    #--------------------------------------------------------------------
+    # Q4. Why is KNN called a lazy learner?  
+    #Because it doesn’t build a model during training — it simply stores the data and performs computation only when making predictions. 
+    # It “learns” lazily at query time.
+    #--------------------------------------------------------------------
+    # Q5. What happens if K is too small?  
+    #The model becomes sensitive to noise and may overfit, as predictions depend on very few neighbors.
+    #--------------------------------------------------------------------
+    #6. What happens if K is too large?  
+    #When K in KNN is too large, the algorithm starts considering many neighbors — 
+    # even those far away or belonging to other classes — which dilutes the influence of the most relevant points.
+    #Underfitting occurs: It fails to capture the true structure of the data because distant, irrelevant neighbors dominate.
+    #Bias increases, variance decreases: Predictions become more stable but less accurate.
+    #--------------------------------------------------------------------
+    #7. Why does linear regression minimize squared error?
+
+
+    #--------------------------------------------------------------------
+    #8. What is the difference between MSE and R²?
+    #MSE (Mean Squared Error): Measures average squared difference between predicted and actual values — lower is better.
+    #R² (Coefficient of Determination): Measures how much variance in the target is explained by the model — closer to 1 is better.
+    #--------------------------------------------------------------------
+    #9. Why R² cannot be greater than 1?  
+    #Because it represents the proportion of variance explained; 1 means perfect prediction, 
+    # and values above 1 are mathematically impossible.
+    #--------------------------------------------------------------------
+    #10. Can KNN be used for regression?  
+    #Yes! Instead of voting for a class, KNN regression averages the target values of the nearest neighbors.
+    #--------------------------------------------------------------------
+    #--------------------------------------------------------------------
+ 
+     
 if __name__=="__main__":
     main()
+    
+
     
     
     
