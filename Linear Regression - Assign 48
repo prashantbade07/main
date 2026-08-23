@@ -1,0 +1,62 @@
+import pandas as pd
+import numpy as np
+
+def main():
+    X=[1,2,3,4,5]
+    Y=[3,4,2,4,5]
+    #X_mean=np.mean(X)
+    #Y_mean=np.mean(Y)
+    sum_x=0
+    sum_y=0
+    for i in X:
+        sum_x=sum_x+i
+    Mean_X=sum_x/len(X)   
+    for i in Y:
+        sum_y=sum_y+i
+        
+    Mean_Y=sum_y/len(Y)   
+    print("Mean of X:",Mean_X)
+    print("Mean of Y:",Mean_Y)
+    
+    n=len(X)
+    # Calculate the slope y=mx+c
+    num=0
+    den=0 
+    for i in range(n):
+        num=num+(X[i]-Mean_X)*(Y[i]-Mean_Y)
+        den=den+(X[i]-Mean_X)**2
+    m=num/den
+    print("Slope of line:",m)
+    
+    #Intercept of Line y-mx=c
+    c=Mean_Y-m*Mean_X
+    print("Intercept is:",c)
+    # Regression Equation
+    print("y=0.4x+2.4")
+    
+    #Q2 - Using same Dataset calculate the model performance
+    # Task 1- Predict all Y values  using regression equation , Mean Sqaure Error(MSE),R2 score 
+    
+    y_list=[]
+    for i in range(n):
+        y_list.append(m*X[i]+c)
+    print("Actual Y values:",Y)
+    print(y_list)
+    
+    #Mean square error
+    print("Mean Square Error")
+    
+    mse= sum((Y[i]-y_list[i])**2 for i in range(n))/n
+    print("Mean Square Error:",mse)
+    
+    print("R2 sqaure Calculations:")
+    
+    a=sum((Y[i]-y_list[i])**2 for i in range(n))
+    b=sum((Y[i]-Mean_Y)**2 for i in range(n)) 
+    r2=a/b
+    print("R2 square is:",r2)                 
+if __name__=="__main__":
+    main()
+    
+    
+    
