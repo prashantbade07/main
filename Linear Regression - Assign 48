@@ -1,3 +1,16 @@
+#-----------------------------------------------------------------------------
+3. Consider below task
+Train linear regression model.
+Predict salary for 6 years of experience.
+Plot regression line using matplotlib.
+Dataset
+Experience	Salary
+1	20000
+2	25000
+3	30000
+4	35000
+5	40000
+#-----------------------------------------------------------------------------
 import pandas as pd
 import numpy as np
 
