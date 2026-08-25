@@ -104,6 +104,65 @@ Definition: The overall proportion of correctly predicted samples.
 Formula: Accuracy=𝑇𝑃+𝑇𝑁/𝑇𝑃+𝑇𝑁+𝐹𝑃+𝐹𝑁
 Use case: Works well when classes are balanced, but can be misleading with imbalanced datasets.
 #---------------------------------------------------------------------------------------------------------
+7. Consider the following data:
+
+Actual Values - 1,1,1,1,0,0,0,0
+Predicted Values - 1,1,0,1,0,1,0,0
+Determine the following values:
+True Positive (TP) - 3
+True Negative (TN) - 3
+False Positive (FP) - 1
+False Negative (FN) -1 
+
+#---------------------------------------------------------------------------------------------------------
+8. Write a Python program that calculates TP, TN, FP, FN for the following arrays:
+python
+actual = [1,1,1,1,0,0,0,0]
+predicted = [1,1,0,1,0,1,0,0]
+Display all four values.
+
+def main():
+    
+    actual = [1,1,1,1,0,0,0,0]
+    predicted = [1,1,0,1,0,1,0,0]
+
+    TP=TN=FP=FN=0 
+    for a,p in zip(actual,predicted):
+        if a==1 and p==1:
+            TP+=1
+        elif a==0 and p==0:
+            TN+=1
+        elif a==1 and p==0:
+            FN+=1
+        else:
+            FP+=1        
+    print("TP",TP)
+    print("TN",TN)
+    print("FP",FP)
+    print("FN",FN)   
+    
+if __name__=="__main__":
+    main()
+
+#---------------------------------------------------------------------------------------------------------
+9. Write a Python program using scikit-learn to generate a classification report for the following data:
+python
+actual = [1,1,1,1,0,0,0,0]
+predicted = [1,1,0,1,0,1,0,0]
+Display the complete classification report including precision, recall, F1-score, and support.
+
+from sklearn.metrics import classification_report
+def main():
+    
+    actual = [1,1,1,1,0,0,0,0]
+    predicted = [1,1,0,1,0,1,0,0]
+    a=classification_report(actual,predicted)
+    print("Classification Report:",a)
+    
+if __name__=="__main__":
+    main()
+
+#---------------------------------------------------------------------------------------------------------
 
 
 
