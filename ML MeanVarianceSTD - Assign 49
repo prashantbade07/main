@@ -1,0 +1,113 @@
+1. Write a Python program that calculates the mean of a dataset using NumPy for the following 
+values:6,7,8,9,10,11,12
+
+import numpy as np
+def main():
+    values=[6,7,8,9,10,11,12]
+    mean=np.mean(values)
+    print("Mean of above values:",mean)
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------------------------
+2. Write a Python program that calculates the variance and standard deviation of the 
+dataset:6,7,8,9,10,11,12
+Variance - It measures the average squared difference from the mean.
+Standard Deviation - It’s simply the square root of variance.
+
+import numpy as np
+def main():
+    values=[6,7,8,9,10,11,12]
+    vari=np.var(values)
+    std=np.std(values)
+    print("Variance of above values:",vari)
+    print("Standard Devition:",std)
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------------------------
+3. Write a Python program using StandardScaler to perform feature scaling on the following 
+dataset:[[25,20000],[30,40000],[35,80000]]
+Print the scaled dataset.
+
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+def main():
+    data=[[25,20000],[30,40000],[35,80000]]
+    scaled=StandardScaler()
+    data_scaled=scaled.fit_transform(data)
+    print(data_scaled)
+    
+if __name__=="__main__":
+    main()
+#---------------------------------------------------------------------------------------------------------
+4. Write a Python program to calculate the Euclidean distance between two points before and 
+after applying feature scaling, and explain the difference in results.
+
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+def main():
+    data=[[25,20000],[30,40000],[35,80000]]
+    point_1=np.sqrt((data[0][0]-data[1][0])**2 + (data[0][1]-data[1][1])**2)
+    print("Euclidean distance between X and Y without scaled:",point_1)
+
+    scaled=StandardScaler()
+    data_scaled=scaled.fit_transform(data)
+    point_1=np.sqrt((data_scaled[0][0]-data_scaled[1][0])**2 + (data_scaled[0][1]-data_scaled[1][1])**2)
+    print("Euclidean distance between X and Y when scaled:",point_1)
+if __name__=="__main__":
+    main()
+
+Before scaling: Large-valued features (like Income) dominate the distance.
+After scaling: All features are on the same scale, so distances reflect balanced contributions.
+#---------------------------------------------------------------------------------------------------------
+5. Explain the concept of a classification report in machine learning. Why is it used and what type of models require it?
+
+A classification report in machine learning is a detailed summary of how well a classification model performs, 
+showing precision, recall, F1‑score, and support for each class. It is used to evaluate models beyond simple accuracy, 
+especially when dealing with imbalanced datasets or multi‑class problems.
+
+Classification models such as:
+Logistic Regression
+Decision Trees & Random Forests
+Support Vector Machines (SVM)
+k‑Nearest Neighbors (kNN)
+Neural Networks for classification
+Not used for regression models (they use metrics like RMSE, MAE, R²).
+
+A classification report is essential whenever you train a classification model. It gives a complete picture of performance per class,
+helping you avoid the trap of relying only on accuracy.
+sklearn.metrics.classification_report(y_true, y_pred)
+
+#---------------------------------------------------------------------------------------------------------
+6. In a classification report, explain the meaning of the following metrics:
+Precision -
+Definition: Of all the samples predicted as a certain class, how many were actually correct.
+Formula: Precision=𝑇𝑃/𝑇𝑃+𝐹𝑃
+Use case: Important when false positives are costly (e.g., predicting spam emails incorrectly).
+
+Recall -
+Definition: Of all the samples that truly belong to a class, how many were correctly identified.
+Formula: Recall=𝑇𝑃/𝑇𝑃+𝐹𝑁
+Use case: Important when false negatives are costly (e.g., missing a cancer diagnosis).
+
+F1 Score -
+Definition: The harmonic mean of precision and recall, balancing both.
+Formula:𝐹1=2⋅Precision*Recall/Precision+Recall
+Use case: Useful when you need a single metric that considers both false positives and false negatives.
+
+Support -
+Definition: The number of actual samples for each class in the dataset.
+Example: If you have 50 samples of class A, its support = 50.
+Use case: Helps you understand class distribution and whether metrics are reliable (low support → less reliable).
+
+Accuracy - 
+Definition: The overall proportion of correctly predicted samples.
+Formula: Accuracy=𝑇𝑃+𝑇𝑁/𝑇𝑃+𝑇𝑁+𝐹𝑃+𝐹𝑁
+Use case: Works well when classes are balanced, but can be misleading with imbalanced datasets.
+#---------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
