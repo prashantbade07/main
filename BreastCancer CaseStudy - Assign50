@@ -1,3 +1,16 @@
+Breast Cancer Prediction
+Breast cancer is one of the leading causes of death among women worldwide. 
+Early detection and accurate diagnosis play a critical role in increasing survival rates.
+You are given a dataset containing various medical features extracted from breast cancer biopsy images. 
+Your task is to develop a machine learning model that can accurately predict
+whether a tumor is Malignant (harmful) or Benign (non-harmful) based on the given features.
+Dataset Details
+
+Source: Breast Cancer Wisconsin Dataset
+Number of Records: 569
+Number of Features: 30 (real-valued features)
+
+
 import pandas as pd 
 
 import matplotlib.pyplot as plt
