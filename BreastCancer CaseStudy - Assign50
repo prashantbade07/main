@@ -1,0 +1,124 @@
+import pandas as pd 
+
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler 
+from sklearn.ensemble import BaggingClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix,precision_score,recall_score,f1_score
+
+def main():
+    Border="-"*50
+    #--------------------------------------------------------------------
+    # Step 1 - Load the Data
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 1 - Load the Data")
+    print(Border)
+    df=pd.read_csv("breast_cancer.csv")
+    print(df.head())
+    print(df.columns)
+    #--------------------------------------------------------------------
+    # Step 2 - Perform Data Preprocessing 
+    #        - Handle the missing values and Normalize or scale features
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 2 - Perform Data Preprocessing")
+    print(Border)
+    print("Check the missing values:")
+    missing_value=df.isnull().sum()
+    print(missing_value)
+    print("Normalize the Data / Feature Scaling")
+    X=df.drop(columns=["target"])
+    Y=df["target"]
+    print(X.head())
+    print(Y.head())
+    
+    #--------------------------------------------------------------------
+    # Step 3.0 - Scatter Plot Visualisation
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 3.0 - Scatter Plot Visualisation")
+    print(Border)
+    plt.figure(figsize=(5,7))
+    plt.scatter(df["mean radius"], df["mean texture"],c=df["target"],cmap='coolwarm', alpha=0.7)
+    plt.xlabel("Mean Radius")
+    plt.ylabel("Mean Texture")
+    plt.title("Scatter Plot Visualisation")
+    plt.show()
+    #--------------------------------------------------------------------
+    # Step 3.1 - Split the dataset for training and testing 
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 3 - Split the dataset for training and testing ")
+    print(Border)
+    X_train,X_test,Y_train,Y_test=train_test_split(X,
+                                                   Y,
+                                                   train_size=0.5,
+                                                   random_state=42)
+    print("Split the dataset")
+    #--------------------------------------------------------------------
+    # Step 4 - Feature Scaling
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 4 - Feature Scaling")
+    print(Border)   
+    scalar=StandardScaler()
+    X_train=scalar.fit_transform(X_train)
+    X_test=scalar.fit_transform(X_test)
+    print("Feature Scaling to bring dataset at same scale")
+    #--------------------------------------------------------------------
+    # Step 5.1 - Create the base model
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 5.1 - Create the base model")
+    print(Border) 
+    base_model=DecisionTreeClassifier(
+        random_state=42
+    )
+    print("Base Model Created Successfully")
+  
+    #--------------------------------------------------------------------
+    # Step 5.2 - Create the Bagging model
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 5.2 - Create the  model")
+    print(Border) 
+    model=BaggingClassifier(
+        estimator=base_model,
+        n_estimators=5,
+        random_state=42
+    )
+    print("Model Created Successfully")
+
+    #--------------------------------------------------------------------
+    # Step 6 - Train the Model
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 6 - Train the Model")
+    print(Border) 
+    
+    model=model.fit(X_train,Y_train)  
+    print("Model Trained")
+    #--------------------------------------------------------------------
+    # Step 7 - Test the Model
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 7 - Test the Model")
+    print(Border) 
+    
+    Y_pred=model.predict(X_test)  
+    print("Model Testing")
+    #--------------------------------------------------------------------
+    # Step 8 - Evaulate the Model
+    #--------------------------------------------------------------------
+    print(Border)
+    print("Step 8 - Evaulate the Model")
+    print(Border)   
+    
+    print("Accuracy Score:",accuracy_score(Y_pred,Y_test))
+    print("Confusion Matrix:",confusion_matrix(Y_pred,Y_test))
+    print("Precision:",precision_score(Y_pred,Y_test))
+    print("Recall:",recall_score(Y_pred,Y_test))
+if __name__=="__main__":
+    main()
