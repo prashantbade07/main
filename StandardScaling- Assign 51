@@ -1,0 +1,109 @@
+1.Explain the concept of variance in your own words. What does variance tell us about a dataset and why is it important in data analysis and machine learning?
+Ans - Variance is how much each values in dataset are scatter from mean value, high variance lead to model overfitting.
+Helps to understand data consistency whether values are tightly clustered or widely dispersed.
+Used in feature scaling and model evaluation.
+
+2.Consider the dataset:  
+4, 6, 8, 10, 12
+Perform the following steps:
+Calculate the mean
+Find the deviation of each value from the mean
+Calculate the square of each deviation
+Calculate the variance of the dataset.
+
+import math
+import numpy as np
+a=[4,6,8,10,12]
+# 1 - Calculate the mean
+amean=np.mean(a)
+print("Mean:",amean)
+
+# 2 - Find the deviation of each value from the mean
+b=[]
+for i in range(len(a)):
+    x=a[i]-amean
+    b.append(x)
+print("Values Deviated from Mean:",end=" ")
+b=np.array(b).tolist()
+print(b)
+
+# 3 - Calculate the square of each deviation
+c=[]
+for i in range(len(b)):
+    c.append(b[i]*b[i])
+print("Square of each deviation:",c)
+
+# 4 - Calculate the variance of the dataset.
+var=[]
+for i in range(len(c)):
+    var.append(c[i]/len(c))    
+print("Variance:",var)
+
+3.Explain the concept of standard deviation. How is standard deviation related to variance and what does it tell us about the distribution of data?
+In machine learning, standard deviation is crucial because it helps us understand data distribution, model stability, and error spread. For instance, 
+if prediction errors have a high standard deviation, the model is inconsistent.
+
+
+4.Consider the dataset:
+5, 7, 9, 11, 13
+Perform the following calculations step by step:
+Calculate the mean
+Calculate the variance
+Calculate the standard deviation
+
+import math
+import numpy as np
+a=[5, 7, 9, 11, 13]
+
+# 1 - Calculate the mean
+amean=np.mean(a)
+print("Mean:",amean)
+
+# 2 - Find the deviation of each value from the mean
+b=[]
+for i in range(len(a)):
+    x=a[i]-amean
+    b.append(x)
+b=np.array(b).tolist()
+
+# 3 - Calculate the square of each deviation
+c=[]
+for i in range(len(b)):
+    c.append(b[i]*b[i])
+
+# 4 - Calculate the variance of the dataset.
+var=[]
+for i in range(len(c)):
+    var.append(c[i]/len(c))    
+print("Variance:",var)
+
+print("Standard Deviation:",np.sqrt(var))
+
+5. Explain the concept of feature scaling. Why is feature scaling required before training certain machine learning models?
+Feature scaling is the process of normalizing or standardizing numerical features so they are on a similar scale.
+It ensures that no feature dominates others simply because of its magnitude.
+
+6. Explain what Standard Scaling (Standardization) means. What happens to the mean and standard deviation of the dataset after scaling?
+Standard scaling transforms data so that it has:
+Mean = 0
+Standard deviation = 1
+The formula is:
+𝑧=𝑥−mean/standard deviation
+After scaling:
+The mean becomes 0
+The standard deviation becomes 1
+This helps models treat all features equally and improves numerical stability.
+
+
+7. Suppose a dataset has the following values:
+6, 7, 8, 9, 10, 11, 12
+The mean is 9 and standard deviation is 2.
+Calculate the scaled values for the following numbers using standard scaling:
+6 9 12 
+
+𝑧=𝑥−9/2
+Value	Calculation	Scaled Value
+6	(6 - 9) / 2	-1.5
+9	(9 - 9) / 2	0
+12	(12 - 9) / 2	1.5
+
