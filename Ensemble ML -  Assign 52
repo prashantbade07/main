@@ -1,0 +1,36 @@
+1.What is Ensemble Learning in Machine Learning?
+Ensemble learning is a machine learning technique where multiple models(weak learners) are trained and combined
+to solve the same problem in order to get better accuracy,stability and robustness.
+
+2.Why do we use multiple models instead of relying on a single Machine Learning model?
+A single model may overfiy or underfit the data. Different model capture different patterns, combining them helps
+balance bias and variance. Ensembles are more robust and generalize better to unseen data.
+
+3.What is meant by a base learner or base estimator?
+A base learner is an individual model that contributes to the ensemble.
+Eg Decision Tree, Logistic Regression,
+Each base learner makes predications and the ensemble combine them (averaging or voting).
+
+
+4.What is the main idea behind Ensemble Learning?
+The main idea is "wisdom of the crowd"
+Just as a group of people can make better decisions collectively, multiple models can produce more accurate
+predications together than one model alone.
+
+5.What are the major types of Ensemble Learning techniques?
+
+6.Explain the difference between:
+
+Bagging - Train multiple models independently on random subsets of the data and average/vote their predications.
+          Reduce variance, avoids overfitting, works well with unstable models
+Boosting - 
+
+Voting
+
+7.Can Ensemble Learning be used for both classification and regression? Explain with examples.
+
+8.Why is diversity among models important in an ensemble?
+
+9.Is combining many models always better than using a single model? Justify your answer.
+
+10.What are the advantages and disadvantages of Ensemble Learning?
