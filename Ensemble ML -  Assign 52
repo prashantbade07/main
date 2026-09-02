@@ -18,19 +18,39 @@ Just as a group of people can make better decisions collectively, multiple model
 predications together than one model alone.
 
 5.What are the major types of Ensemble Learning techniques?
-
-6.Explain the difference between:
-
-Bagging - Train multiple models independently on random subsets of the data and average/vote their predications.
-          Reduce variance, avoids overfitting, works well with unstable models
-Boosting - 
-
+Bagging (Bootstrap Aggregating)
+Boosting
 Voting
 
+6.Explain the difference between:
+Bagging - Train multiple models independently on random subsets of the data and average/vote their predications.
+          Reduce variance, avoids overfitting, works well with unstable models
+          Useful in spam detection, credit scoring.
+
+Boosting - Train models sequentially where each models learns from the mistakes of the previous ones.
+          Useful in customer churn prediction, fraud detection.
+
+Voting - Combines predications from different models (Hard - 1/0, Soft- gives in probability)
+
 7.Can Ensemble Learning be used for both classification and regression? Explain with examples.
+Yes,
+Classification - Random Forest Classifier, AdaBoost Classifier
+Regression - Random Forest Regressor,Gradient Boosting Regressor
+Both cases, ensembles aggregate predications(majority vote for classification, average for regression)
 
 8.Why is diversity among models important in an ensemble?
+If all models makes similar errors, combining them won't help.
+Diversity ensures that different models capture different aspect od the data, so their errors cancel out- leading better performance.
 
 9.Is combining many models always better than using a single model? Justify your answer.
+Not always,
+If models are too similar, the ensemble add little value.
+If model are too complex,it may increase computation and risk overfitting.
+Effective ensembles requires diverse and well trained base learners.
 
 10.What are the advantages and disadvantages of Ensemble Learning?
+
+Advantages	                    Disadvantages
+Higher accuracy and robustness	Increased computational cost
+Reduces overfitting and variance	Harder to interpret
+Works well for complex problems	Requires careful tuning and diversity
