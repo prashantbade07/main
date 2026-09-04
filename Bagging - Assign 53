@@ -1,0 +1,4 @@
+1. What is Bagging in Machine Learning?
+Bagging is an ensemble technique that trains multiple models on different random subsets of the training data
+and combines their predictions to improve stability and accuracy.
+It helps reduce variace and prevent overfitting.
