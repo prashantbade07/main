@@ -7,3 +7,37 @@ that's why its an ensemble(a group of models working together).
 It is an example of Bagging (Bootstrap Aggregating).
 It trains many Decision Trees independtly (parallel) on different random subsets of data and features,
 then aggregates their predictions.
+
+3. What is the relationship between Bagging and Random Forest?
+Random Forest is a special case of Bagging applied to Decision Trees,
+Bagging reduces variance by averaging multiple models, Random Forest adds an extra layer of randomness 
+by selecting random subsets of features for each tree.
+
+4. What is the major difference between Bagging with Decision Trees and Random Forest?
+Aspect	            Bagging with Decision           Trees	Random Forest
+Feature Selection	  Uses all features	              Uses random subsets of features
+Diversity	          Less diverse	                  More diverse due to feature randomness
+Performance	        Good	                          Often better due to reduced correlation among trees
+
+5. Can Random Forest be used for both classification and regression?
+Yes,
+Classification-Predicts categories(eg.spam or not spam)
+Regression-Predicts continuous values(eg.house prices)
+It's flexible because Decision Tree can handle both types.
+
+6. How is the final prediction generated in:
+Random Forest Classification - Each tree votes for a class, the majority vote becomes the final predication.
+Random Forest Regression - Each tree predicts a numeric value, the average of all predictions is the final output.
+
+
+7. What is Boosting in Machine Learning?
+Boosting is another ensemble technique that builds models sequentially, where each new model focuses on correcting
+the errors made by previous ones.
+It aims to reduces bias and improve accuracy.
+
+8. Explain the basic working principle of Boosting.
+
+
+
+
+
