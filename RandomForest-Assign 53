@@ -42,7 +42,16 @@ c.Train the next model on the updated data(adjust weights).
 d.Repeat for n iterations.
 e.Combine all models using weighted voting/averaging
 
+9.Are models in Boosting generally trained independently or sequentially?
+Model are trained sequentiall-each model depends on the performance of the previous one.
+This is the key difference from Bagging where models are trained parallely/independently.
 
-
+10. What does it mean when we say:
+“Every new learner tries to correct the mistakes made by the previous learners.”
+Explanation:  
+In Boosting each new model gives more weights to the data points that were misclassified earlier.
+Example-
+In AdaBoost if a Decision Tree misclassifies certain samples, those samples get higher weights in the next
+iteration so the next tree focuses on them. 
 
 
