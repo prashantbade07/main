@@ -1,0 +1,9 @@
+1. Why is Random Forest considered an Ensemble Learning algorithm?
+Random Forest combines multiple Decision Tree to make a single, stronger application.
+Each tree votes or averages its output, and the final result is based on the collective decision-
+that's why its an ensemble(a group of models working together).
+
+2. Is Random Forest an example of Bagging or Boosting?
+It is an example of Bagging (Bootstrap Aggregating).
+It trains many Decision Trees independtly (parallel) on different random subsets of data and features,
+then aggregates their predictions.
