@@ -2,3 +2,43 @@
 Bagging is an ensemble technique that trains multiple models on different random subsets of the training data
 and combines their predictions to improve stability and accuracy.
 It helps reduce variace and prevent overfitting.
+
+2. Explain the basic working principle of Bagging.
+a.Create several bootstrap samples from the original dataset(sampling with replacement).
+b.Train a separate model (base learner)on each sample.
+c.Combine all predictions by majority voting (for classification) or averaging (for regression).
+This aggregation smooths out individual model errors.
+
+3. Why is sampling performed with replacement in Bagging?
+Sampling with replacement ensures that each bootstrap sample is slightly different from the original dataset.
+This introdues diversity among models,which is crucial for reducing variance and improving generalization.
+
+4. Can the same training record appear multiple times in a bootstrap sample?
+Yes, Because sampling is done with replacement, the same record can appear multiple times in one sample, 
+while others might not appear at all.
+
+5. Are the individual models in Bagging trained sequentially or independently?
+They are trained independently-each model learns from its own bootstrap sample without depending on others.
+
+6. Can Bagging models be trained in parallel? Why?
+Yes, since each model is independent, bagging allows parallel training. which makes it computationally efficient and scalable.
+
+7. How are predictions combined in Bagging for regression?
+For regrssion tasks,bagging combines predictions by taking the average of all model outputs, This 
+averaging reduces variance and yeilds smoother predictions.
+
+8. Which problem does Bagging primarily try to reduce: bias or variance?
+Bagging mainly reduces variance-it stabilizes high variance models (like Decision Tree) by averaging predictions.
+
+9. Why are Decision Trees commonly used as base estimators in Bagging?
+Decision Trees are unstable- small changes in data can lead to large changes in predictions.
+Bagging helps stabilize them by averaging multiple trees,which is why Random Forest( a Bagging base method)
+use Decision Tree as base learners.
+
+10. Can Logistic Regression be used as a base estimator inside a Bagging ensemble?
+Yes it can.
+Any model can serve as a base learner in Bagging-Logistic Regression,SVM's,Neural Networks-through Decision Trees are preferred because they
+benefit most from variance reduction.
+
+
+
