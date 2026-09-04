@@ -36,6 +36,11 @@ the errors made by previous ones.
 It aims to reduces bias and improve accuracy.
 
 8. Explain the basic working principle of Boosting.
+a.Start with an initial model(usually weak like a shallow tree).
+b.Evaluate errors ->focus more on incorrectly predicted data points.
+c.Train the next model on the updated data(adjust weights).
+d.Repeat for n iterations.
+e.Combine all models using weighted voting/averaging
 
 
 
