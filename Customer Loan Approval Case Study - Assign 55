@@ -1,0 +1,44 @@
+Customer Loan Approval Using Voting Classification
+A bank wants to automate its loan approval process.
+The bank has historical information about customers such as:
+Age
+Income
+Credit Score
+Existing Loan
+Employment Experience
+Loan Amount
+The target column is:
+LoanApproved
+where:
+0 → Loan Rejected
+1 → Loan Approved
+The bank does not want to depend on a single Machine Learning algorithm.
+Build a Voting Classifier using:
+Logistic Regression
+Decision Tree
+K-Nearest Neighbors
+
+Steps:
+1.Load the dataset.
+2.Check for missing values.
+3.Separate input and output variables.
+4.Split the dataset into training and testing data.
+5.Train Logistic Regression.
+6.Train Decision Tree.
+7.Train KNN.
+8.Calculate the individual accuracy of all three algorithms.
+9.Create a Hard Voting Classifier.
+10.Calculate its accuracy.
+11.Create a Soft Voting Classifier.
+12.Calculate its accuracy.
+
+Compare:
+Python - Automation & Machine Learning
+Model	                        Accuracy
+Logistic Regression	
+Decision Tree	
+KNN	
+Hard Voting	
+Soft Voting
+
+
