@@ -1,0 +1,223 @@
+Fraudulent Transaction Detection
+A financial institution wants to detect potentially fraudulent transactions.
+Available information includes:
+Transaction Amount
+Transaction Time
+Account Age
+Number of Previous Transactions
+Location Difference
+Device Type
+Failed Login Attempts
+
+Target:
+Fraud
+0 → Normal Transaction
+1 → Fraudulent Transaction
+
+You must investigate different ensemble approaches and recommend the most suitable model.
+Tasks
+Build and compare:
+Decision Tree
+Bagging Classifier
+Random Forest Classifier
+AdaBoost Classifier
+Voting Classifier
+
+Evaluate each model using:
+Accuracy
+Precision
+Recall
+F1 Score
+Confusion Matrix
+
+Prepare a final comparison:
+
+Algorithm	            Accuracy	 Precision	 Recall	   F1
+Decision Tree				
+Bagging				
+Random Forest				
+AdaBoost				
+Voting				
+#-------------------------------------------------------------------------------------------------------------------
+import pandas as pd
+import numpy as np 
+
+from sklearn.model_selection import train_test_split 
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import VotingClassifier
+
+from sklearn.metrics import accuracy_score,confusion_matrix,f1_score,precision_score,recall_score
+
+def main():
+    
+    Border="-"*55
+    print(Border)
+    print("----------Fraudulent Transaction Detection-------------")
+    #-----------------------------------------------------------------
+    #Step 1 - Load the Data 
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 1 - Load the Data")
+    print(Border)
+    df=pd.read_csv("Fraudulent_Transaction_Detection.csv")
+    print(df.head())
+    print("Columns are:")
+    print(df.columns)
+ 
+    #-----------------------------------------------------------------
+    #Step 2 - Check for missing values
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 2 - Check for missing values")
+    print(Border)   
+    print("Missing Null values are:",df.isnull().sum())
+    print(df.head())
+  
+    #-----------------------------------------------------------------
+    #Step 3 - Separate input and output variables
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 3 - Separate input and output variables")
+    print(Border) 
+    X=df.drop(columns=["Fraud"])
+    Y=df["Fraud"]
+    print("X:")
+    print(X.head())
+    print("Y:")
+    print(Y.head())
+
+    #-----------------------------------------------------------------
+    #Step 4 - Split the dataset into training and testing data
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 4 - Split the dataset into training and testing data.")
+    print(Border) 
+    X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42)
+    
+    scalar=StandardScaler()
+    X_train=scalar.fit_transform(X_train)
+    X_test=scalar.fit_transform(X_test)
+    print("Dataset splitted into training and testing successfully")
+    
+    #-----------------------------------------------------------------
+    #Step 5 - Train Decision Tree.
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 5 - Train Decision Tree")
+    print(Border)
+    model_dt=DecisionTreeClassifier(random_state=42)
+    model_dt.fit(X_train,Y_train)
+    print("Trained the Decision Tree")
+   
+    #-----------------------------------------------------------------
+    #Step 6 - Train Bagging Classifier
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 6 - Train Bagging Classifier")
+    print(Border) 
+    
+    model_bag=BaggingClassifier(
+       estimator=model_dt,
+       n_estimators=10,
+       random_state=42
+       )
+    model_bag.fit(X_train,Y_train)
+    print("Trained the Bagging Classifier")
+
+    #-----------------------------------------------------------------
+    #Step 7 - Train Random Forest Classifier
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 7 - Train Random Forest Classifier")
+    print(Border)
+    model_rfc=RandomForestClassifier(
+       n_estimators=10,
+       random_state=42
+    )
+    model_rfc.fit(X_train,Y_train)
+    print("Trained the Random Forest Classifier")
+    
+    #-----------------------------------------------------------------
+    #Step 8 - Train AdaBoost Classifier
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 8 - Train AdaBoost Classifier")
+    print(Border)
+    model_adb=AdaBoostClassifier(
+       n_estimators=50,
+       learning_rate=1.0,
+       random_state=42
+    )
+    model_adb.fit(X_train,Y_train)
+    print("Trained the AdaBoost Classifier")
+     
+    #-----------------------------------------------------------------
+    #Step 9 - Create a Hard Voting Classifier
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 9 - Create a Hard Voting Classifier")
+    print(Border)
+    model=VotingClassifier(
+       estimators=[
+        ('decision_tree',model_dt),
+        ('bagging',model_bag),
+        ('random_forest',model_rfc),
+        ('adaboost',model_adb)
+       ],
+       voting='hard'
+    )
+    model=model.fit(X_train,Y_train)
+    print("Voting model created successfully")         
+    #-----------------------------------------------------------------
+    #Step 9 - Calculate the individual accuracy of all the algorithms.
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 9 - Calculate the individual accuracy of all the algorithms.")
+    print(Border)
+    
+    Y_pred_dt=model_dt.predict(X_test)
+    Y_pred_bag=model_bag.predict(X_test)
+    Y_pred_rfc=model_rfc.predict(X_test)
+    Y_pred_adb=model_adb.predict(X_test)
+    Y_pred=model.predict(X_test)
+
+    print("DecisionTreeClassifier Accuracy:",accuracy_score(Y_test,Y_pred_dt))
+    print("BaggingClassifier Accuracy:",accuracy_score(Y_test,Y_pred_bag))
+    print("RandomForestClassifier Accuracy:",accuracy_score(Y_test,Y_pred_rfc))
+    print("AdaBoostClassifier Accuracy:",accuracy_score(Y_test,Y_pred_adb))
+
+
+    #-----------------------------------------------------------------
+    #Step 10 - Calculate the accuracy,precision,f1,recall
+    #-----------------------------------------------------------------
+    print(Border)
+    print("Step 10 - Calculate the accuracy,precision,f1,recall")
+    print(Border)    
+    models={
+       "Decision Tree":Y_pred_dt,
+       "Bagging Classifier":Y_pred_bag,
+       "Random Forest": Y_pred_rfc,
+       "Adaboost":Y_pred_adb,
+       "Voting":Y_pred
+    }
+    result=[]
+    for name,pred in models.items():
+       result.append(
+          {
+             "Algorithm":name,
+             "Accuracy":accuracy_score(Y_test,pred),
+             "Precision":precision_score(Y_test,pred),
+             "Recall":recall_score(Y_test,pred),
+             "F1":f1_score(Y_test,pred)
+          }
+       )
+    result_df=pd.DataFrame(result)
+    print(result_df)
+       
+if __name__=="__main__":
+    main()
