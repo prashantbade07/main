@@ -29,18 +29,41 @@ Hidden Layer - Layers between input and output layers where transformation occur
 Hidden layers learn complex patterns by applying weights,bias and nonlinear function.
 Output Layer - The final layer that produces the network's predictions.
 
+Part	                        Function (One‑Line Description)
+Dendrites                   	Receive incoming electrical signals from other neurons.
+Cell Body (Soma)	            Processes signals and generates impulses when threshold is reached.
+Nucleus	                      Controls cell activities and maintains neuron health.
+Axon	                        Transmits the processed signal to other neurons or muscles.
+Myelin Sheath	                Insulates the axon and speeds up signal transmission.
+Synapse	                      Transfers signals to the next neuron and strengthens connections for memory storage.
 
 
 6.Why is it called a Neural Network? Explain with human brain neurons.
+It mimics biological neurons interconnected nodes transmitting signals.
+Juat like brain neurons communicate via synapse, ANN neurons pass signals through weighted connections.
 
 7.Explain biological neuron and artificial neuron comparison.
 
+Biological Neuron	                                                     Artificial Neuron (ANN)
+Dendrites receive signals from other neurons.	                         Input layer receives raw data features.
+Cell body (Soma) processes signals and decides whether to fire.        Hidden layers process weighted inputs and apply activation functions to learn complex patterns.
+Axon transmits the signal to other neurons.	                           Output layer produces the final prediction or classification.
+Synapses connect neurons and strengthen with learning (memory).	       Weights connect nodes and adjust during training to improve accuracy.
+
+
 8.What is a neuron in ANN? Explain its working.
+The smallest unit of an Artifical Neural Network, inspired by biological brain neurons.
+Each neuron takes inputs, multiplies them with weights, adds a bias, applies an activation functions and
+produces an output.
 
 9.What are weights in neural networks? Why are they important?
+Numerical values representing the strength of connections between neurons.
+High weight - strong influence of input on output.
+Low weight - weak/no influence.
 
 10.What is bias in ANN? Why is bias required?
-
+An additional parameters that allows shifting the activation functions
+It helps the model fit data better, even if all inputs are zero.
 
 
 
