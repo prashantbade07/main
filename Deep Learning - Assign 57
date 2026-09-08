@@ -61,6 +61,9 @@ Numerical values representing the strength of connections between neurons.
 High weight - strong influence of input on output.
 Low weight - weak/no influence.
 
+They are learned during training and directly affect model accuracy.
+Without proper weights, the network cannot capture relationship in data.
+
 10.What is bias in ANN? Why is bias required?
 An additional parameters that allows shifting the activation functions
 It helps the model fit data better, even if all inputs are zero.
