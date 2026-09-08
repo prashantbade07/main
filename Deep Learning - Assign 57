@@ -1,0 +1,63 @@
+1.What is Deep Learning? Why is it considered a subset of Machine Learning?
+Deep Learning is a subset of Machine Learning that uses Artifical Neural Networks with many layers.
+This multiple layers help the system learn highly complex patterns.
+It is consider a subset of because it builds on ML priciples but scales them with deeper architectures.
+
+2.Differentiate Artificial Intelligence, Machine Learning, and Deep Learning with suitable examples.
+
+Concept	                 Description	                                                                  Example
+AI	                     Broad field of smart machines, aim to   simulate human intelligence	          Chatbots, self driving cars
+ML	                     Machines/Alogorithms that learns from data	                                    Spam Detection,recommendation systems
+DL	                     Uses neural neyworks with many layers	                                        Image recognition,speech translation
+
+
+3.Explain the difference between rule-based systems and learning-based systems.
+Rule based system rely on predefined logic (if-then rules), while learning based systems infer 
+patterns from data and improve with experience.
+
+
+4.What is meant by training a model in Deep Learning?
+It means adjusting parameters (weights and biases) using data to minimize prediction error-typically
+via optimization algorithms like gradient descent.
+
+
+5.What is an Artificial Neural Network (ANN)? Explain with block diagram.
+A computational model inspired by the brain, consisting of input, hidden and output layers.
+Input Layer - The first layer of the network where raw data enters.
+Each node in this layer represent one feature  from the dataset.
+Hidden Layer - Layers between input and output layers where transformation occur.
+Hidden layers learn complex patterns by applying weights,bias and nonlinear function.
+Output Layer - The final layer that produces the network's predictions.
+
+
+
+6.Why is it called a Neural Network? Explain with human brain neurons.
+
+7.Explain biological neuron and artificial neuron comparison.
+
+8.What is a neuron in ANN? Explain its working.
+
+9.What are weights in neural networks? Why are they important?
+
+10.What is bias in ANN? Why is bias required?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
