@@ -1,0 +1,61 @@
+1.Explain weighted sum in neural networks.
+Each neuron computes a weighted sum of its input:
+z=w1 * x1 + w2 * x2 + wn * xn + b
+where wi are weights xi are inputs and b is bias
+It measures how strongly each input contributes to the neuron's output.
+Weighted sum is the bridge between raw inputs and meaningful predictions.
+
+2.What is forward propagation? Explain step by step.
+Process of sending inputs through the network (layer by layer) to generate an output.
+Each layer transform data -> output layer gives predictions.
+a.Inputs are multiplied by weights and added with bias
+b.The result passes through an activation function.
+c.The output of one layer becomes the input to the next.
+d.The final layer produces the network's prediction.
+
+3.What is backpropagation? Why is it important?
+Algorithm used to update weights by minimizing prediction error.
+a. Calculate loss(error).
+b.Finds gradient(slope) of error wrt weights.
+c.Adjusts weights in opposite of gradient.
+
+4.What is learning rate? What happens if it is too high or too low?
+A parameter controlling how much weights are updated during training.
+Small-slow but stable learning
+High-fast learning but may overshoot
+
+5.What is Perceptron? Explain its history and inventor.
+The smallest unit of an ANN inspired by biological brain neurons.
+It was invented by Frank Rosenblatt in 1958.
+
+6.Explain structure of Perceptron with inputs, weights, bias, and output.
+
+Component	                        Description
+Inputs (x₁, x₂, …)	              Features fed into the model
+Weights (w₁, w₂, …)	              Determine importance of each input
+Bias (b)	                        Shifts decision boundary
+Output (y)	                      Computed as 𝑦=𝑓(∑𝑤𝑖𝑥𝑖+𝑏)
+
+7.Draw and explain Perceptron model.
+Input nodes connected to one output node.
+Each connection has a weight.
+The weighted sum passes through activation funtion (TanH/Relu) to produce output.
+
+8.Write and explain Perceptron formula.
+y = f(w1 x1 + w2 x2 + ... + b)
+Here, f is the activation function(often a step or sigmoid).
+It decides whether the neuron fires(1) or not(0).
+
+9.What is activation function in Perceptron?
+It adds non linearity and decides the neuron's output.
+Step function - Binary output (0 or 1)
+Sigmoid - Smooth output between 0 and 1
+ReLU - Outputs positive values or zero
+
+10.Differentiate Single Layer Perceptron and Multi Layer Perceptron.
+
+Feature	Single‑             Layer	                                         Multi‑Layer
+Structure	                  One input and one output layer	               Includes hidden layers
+Capability	                Solves only linearly separable problems	       Handles complex, non‑linear problems
+Learning Algorithm	        Simple Perceptron rule	                       Uses backpropagation
+Example                     Use	AND/OR logic gates	                       Image recognition, NLP
