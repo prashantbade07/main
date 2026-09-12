@@ -1,0 +1,45 @@
+1.Explain Sigmoid activation function with graph.
+𝜎(𝑥)=1/1+𝑒−𝑥
+Range: (0, 1)
+Graph: S-shaped curve.
+Use: Converts any real value into a probability-like output.
+Example: Used in binary classification output layers.
+
+2.Write advantages and disadvantages of Sigmoid function.
+
+Advantages:
+Smooth and differentiable.
+Maps values to (0,1), useful for probabilities.
+
+Disadvantages:
+Causes vanishing gradient for large |x|.
+Output not zero-centered.
+Slower convergence in deep networks.
+
+3.Explain Tanh activation function.
+Formula: 
+tanh(𝑥)=𝑒𝑥−𝑒−𝑥/𝑒𝑥+𝑒−𝑥
+Range: (-1, 1)
+Graph: S-shaped but centered at zero.
+Use: Preferred over Sigmoid for hidden layers because it outputs both positive and negative values.
+
+4.Differentiate Sigmoid and Tanh activation functions.
+Feature               	Sigmoid	                    Tanh
+Range	                  (0, 1)	                    (-1, 1)
+Center	                Not zero-centered	          Zero-centered
+Gradient	              Smaller	                    Larger
+Preferred for	          Output layer (binary)	      Hidden layers
+
+5.Explain ReLU activation function with graph.
+𝑓(𝑥)=max⁡(0,𝑥)
+
+
+6.Why is ReLU commonly used in hidden layers?
+
+7.What is Softmax activation function?
+
+8.Why Softmax is used in multiclass classification?
+
+9.Which activation function is commonly used for binary classification output layer?
+
+10.Which activation function is used for multiclass output layer?
