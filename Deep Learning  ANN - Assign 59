@@ -1,0 +1,39 @@
+1.What is Input Layer? Explain its role in ANN.
+The first layer of the network where raw data enters.
+For example - For image classification, each pixel value becomes an input neuron.
+
+2.What is Hidden Layer? Why is it called hidden?
+Layer between input and output layer where transformation occurs using weight and activation function its hidden not directly visible to user.
+
+3.What is Output Layer? Explain its purpose.
+The final layer that produces the network predictions.
+Its size depend on - 
+Binary Classification - 1 node (eg. Yes/No)
+Multi-class classification - N nodes (softmax gives probabilities)
+
+4.Why are hidden layers important in Deep Learning?
+They enable network to learn non linear relationship
+Without them model will behave like linear regression.
+
+5.How many hidden layers make a network “Deep”?
+A network is consider deep when it has two or more hidden layers.
+More layers - more abstraction - better feature extraction.
+
+6.What operations happen in Input Layer?
+Normalization or scaling of input data.
+Passing input values forward to the first hidden layer.
+
+7.What operations happen in Hidden Layer?
+Weighted sum of inputs -> activation function -> output to next layer.
+Example - y=f(wx+b) , where f is activation function like ReLU or sigmoid.
+
+8.What happens in Output Layer during prediction?
+Combine signals from the last hidden layer to produce final output.
+Often uses softmax (multi class) or sigmoid (for binary) activation.
+
+9.Draw ANN having 3 input neurons, 2 hidden neurons, and 1 output neuron.
+
+10.Can a neural network work without hidden layer? Explain with example.
+Yes, but only for linearly separable problems.
+Example - A single layer perceptron can classify data like AND/OR
+
