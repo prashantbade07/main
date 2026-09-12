@@ -32,14 +32,25 @@ Preferred for	          Output layer (binary)	      Hidden layers
 
 5.Explain ReLU activation function with graph.
 𝑓(𝑥)=max⁡(0,𝑥)
-
+Graph: Linear for positive x, flat for negative x.
+Use: Introduces non-linearity while being computationally efficient.
 
 6.Why is ReLU commonly used in hidden layers?
+Avoids vanishing gradient problem.
+Simple and fast computation.
+Sparse activation (only positive neurons fire).
+Works well for deep networks.
 
 7.What is Softmax activation function?
+Convert output into probabilities that sum to 1.
+Softmax(𝑥𝑖)=𝑒𝑥𝑖/∑𝑗𝑒𝑥𝑗
 
 8.Why Softmax is used in multiclass classification?
+Provides probability distribution across multiple classes.
+Ensures the highest probability corresponds to the predicted class.
 
 9.Which activation function is commonly used for binary classification output layer?
+Sigmoid is commonly used because it output multiple probabilites that sum to 1, one for each class.
 
 10.Which activation function is used for multiclass output layer?
+Softmax is used because it outputs multiple probabilites that sum to 1, one for each class.
