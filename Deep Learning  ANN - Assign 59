@@ -33,6 +33,7 @@ Often uses softmax (multi class) or sigmoid (for binary) activation.
 
 9.Draw ANN having 3 input neurons, 2 hidden neurons, and 1 output neuron.
 
+
 10.Can a neural network work without hidden layer? Explain with example.
 Yes, but only for linearly separable problems.
 Example - A single layer perceptron can classify data like AND/OR
