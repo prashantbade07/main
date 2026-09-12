@@ -1,1 +1,19 @@
+1.What is Feed Forward Neural Network (FNN)? Explain architecture.
 
+2.Why is it called feed forward network?
+
+3.Explain working steps of FNN from input to output.
+
+4.Explain Mean Squared Error with example.
+
+5.What is Binary Cross Entropy loss function?
+
+6.What is optimizer in Deep Learning?
+
+7.What is epoch in neural network training?
+
+8. epoch, batch size, and iteration.
+
+9.What is CNN? Why is it popular for image processing?
+
+10.Why CNN performs better than ANN for image data?
