@@ -1,0 +1,64 @@
+Deep Learning Assignment
+A software company is experiencing high employee turnover. Management wants to build an intelligent system that can identify employees who are likely to leave the company.
+The HR department has collected historical employee information.
+Dataset
+Create a CSV file named:
+Employee_Attrition.csv
+
+Possible features:
+
+Feature          	  Description
+Age              	  Employee age
+MonthlyIncome	      Monthly salary
+YearsAtCompany	    Experience in current company
+TotalWorkingYears	  Total professional experience
+DistanceFromHome	  Distance from home to office
+JobSatisfaction	    Rating from 1–4
+WorkLifeBalance	    Rating from 1–4
+OverTime	          Yes/No
+NumCompaniesWorked	Previous companies
+
+Assignment
+Build a Deep Learning-based Employee Attrition Prediction System using MLPClassifier.
+
+The system should accept employee information and predict:
+
+0 → Employee is likely to stay  
+1 → Employee is likely to leave
+
+Tasks
+1.Load the dataset using Pandas.
+2.Display the shape, columns and first five records.
+3.Check for missing values.
+4.Identify numerical and categorical features.
+5.Convert categorical features such as OverTime into numerical representation.
+6.Convert the target Attrition into 0 and 1.
+7.Separate independent and dependent variables.
+8.Divide the dataset into training and testing data.
+9.Apply appropriate feature scaling.
+10.Design an MLP with at least two hidden layers.
+11.Train the network.
+12.Display the number of iterations required for training.
+13.Calculate training accuracy.
+14.Calculate testing accuracy.
+15.Generate a confusion matrix.
+16.Plot the loss curve.
+17.Create a function: PredictAttrition(employee_data)
+18.Test the system using at least five new employee records.
+19.Explain whether the model is suffering from overfitting or underfitting.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
