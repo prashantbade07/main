@@ -1,18 +1,54 @@
 1.What is Feed Forward Neural Network (FNN)? Explain architecture.
+A type of artifical neural network where connection betweem nodes do not form cycles.
+Input layer->Hidden layers->Output layer
+Data flows only in one direction-forward
+Used in regression,classification and pattern recognition tasks.
 
 2.Why is it called feed forward network?
+Because information moves forward from input to output without looping back
+No feedback connection like in recurrent networks.
 
 3.Explain working steps of FNN from input to output.
+Input-Data enters through the input layer.
+Weighted Sum-Each neuron multiplies inputs by weights and adds bias 
+Activation-Non linear functions are applied
+Output-The final layer produces predictions.
+Error calculation-Compare prediction with actual output using a loss function
+Backpropagation-Adjust weights to minimize error.
 
 4.Explain Mean Squared Error with example.
+𝑀𝑆𝐸=1/n(∑𝑖=1𝑛(𝑦𝑖−𝑦^𝑖)2)
+If actualvalues =[2,3],predicted=[2.5,2.8]
+MSE=((2-2.5)2+(3-2.8)2/2=0.145
+Measures average squared difference between predicted and actual values.
 
 5.What is Binary Cross Entropy loss function?
+𝐿=−1𝑛∑[𝑦log⁡(𝑦^)+(1−𝑦)log(1−𝑦^)]
+Use: For binary classification (e.g., spam vs. not spam).
+Interpretation: Penalizes incorrect predictions more heavily when confidence is high.
 
 6.What is optimizer in Deep Learning?
+Alogrithm that updates weight to minimize loss.
+Example-
+SGD(Stochastic Gradient Descent)
+Adam(adaptive learning rate)
+RMS Prop
+Controls how fast and effectively the model learns.
 
 7.What is epoch in neural network training?
+One epoch=one full pass of the entire training dataset through the network
+Multiple epochs are used to improve accuracy.
+Once the entire dataset has gone through forward + backward passes, that’s one epoch.
 
 8. epoch, batch size, and iteration.
+
+Term                         	Meaning	                               Example
+Epoch	                        One full pass through dataset	         10 epochs = 10 passes
+Batch Size	                  Number of samples processed before     Batch size = 32
+                              updating weights	
+Iteration	                   One update step per batch	             If dataset = 320 samples, 
+                                                                     batch size = 32 → 10 iterations per epoch
+
 
 9.What is CNN? Why is it popular for image processing?
 
