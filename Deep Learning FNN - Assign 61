@@ -51,5 +51,20 @@ Iteration	                   One update step per batch	             If dataset =
 
 
 9.What is CNN? Why is it popular for image processing?
+A deep learning model designed to process grid like data(images).
+Convolutional layers,pooling layers,fully connected layers.
+Popular-
+Automatically extracts spatial features
+Reduces parameters using shared weights.
+Excellent for image recognition and object detection.
 
 10.Why CNN performs better than ANN for image data?
+Capture spatial relationship between pixels.
+Fewer parameters-faster training
+Detects features regardless of position.
+Hierarchical Feature Learning-Learning edges->shapes->object progressively.
+
+
+
+
+
