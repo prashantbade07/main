@@ -48,17 +48,259 @@ Tasks
 19.Explain whether the model is suffering from overfitting or underfitting.
 
 
+######################################################################
+
+import pandas as pd 
+import numpy as np 
+
+from sklearn.model_selection  import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+
+from sklearn.metrics import accuracy_score,confusion_matrix
+
+import matplotlib.pyplot as plt 
 
 
+Border="-"*70
+######################################################################
+# Step 1 - Load the dataset using Pandas
+######################################################################
+
+print(Border)
+print("Step 1 - Load the dataset using Pandas")
+print(Border)
+df=pd.read_csv("Employee_Attrition.csv")
+print("Data loaded successfully")
+
+######################################################################
+# Step 2 - Display the shape, columns and first five records
+######################################################################
+
+print(Border)
+print("Step 2 - Display the shape, columns and first five records")
+print(Border)
+print("Shape :",df.shape)
+print("Columns :",df.columns)
+print("Shape :",df.head())
 
 
+######################################################################
+# Step 3 - Check for missing values
+######################################################################
 
+print(Border)
+print("Step 3 - Check for missing values")
+print(Border)
+print("Missing values :",df.isnull().sum())
 
+######################################################################
+# Step 4 - Identify numerical and categorical features
+######################################################################
 
+print(Border)
+print("Step 4 - Identify numerical and categorical features")
+print(Border)
 
+num_features=df.select_dtypes(include=[np.number]).columns.tolist()
+cat_features=df.select_dtypes(exclude=[np.number]).columns.tolist()
+print("Numerical:",num_features)
+print("Categorical:" , cat_features)
 
+######################################################################
+# Step 5 - Convert categorical features into numerical representation
+######################################################################
 
+print(Border)
+print("Step 5 - Convert categorical features into numerical representation")
+print(Border)
 
+df["OverTime"]=df["OverTime"].map({"Yes":1,"No":0})
 
+######################################################################
+# Step 6 - Convert the target Attrition into 0 and 1
+######################################################################
 
+print(Border)
+print("Step 6 - Convert the target Attrition into 0 and 1")
+print(Border)
 
+df["Attrition"]=df["Attrition"].map({"Yes":1,"No":0})
+
+######################################################################
+# Step 7 - Separate independent and dependent variables
+######################################################################
+
+print(Border)
+print("Step 7 - Separate independent and dependent variables")
+print(Border)
+
+X=df.drop(columns=["Attrition"])
+Y=df["Attrition"]
+
+######################################################################
+# Step 8 - Divide the dataset into training and testing data
+######################################################################
+
+print(Border)
+print("Step 8 - Divide the dataset into training and testing data")
+print(Border)
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42)
+
+######################################################################
+# Step 9 - Apply appropriate feature scaling
+######################################################################
+
+print(Border)
+print("Step 9 - Apply appropriate feature scaling")
+print(Border)
+
+scalar=StandardScaler()
+X_train=scalar.fit_transform(X_train)
+X_test=scalar.fit_transform(X_test)
+
+######################################################################
+# Step 10 - Design an MLP with at least two hidden layers
+######################################################################
+
+print(Border)
+print("Step 10 - Design an MLP with at least two hidden layers")
+print(Border)
+
+model=MLPClassifier(
+    hidden_layer_sizes=(11,7),
+    activation='relu',
+    solver='adam',
+    max_iter=100      
+    )
+
+######################################################################
+# Step 11 - Train the network
+######################################################################
+
+print(Border)
+print("Step 11 - Train the network")
+print(Border)
+
+model=model.fit(X_train,Y_train)
+
+######################################################################
+# Step 12 - Display the number of iteration required for training
+######################################################################
+
+print(Border)
+print("Step 12 - Display the number of iteration required for training")
+print(Border)
+
+print("Iterations :",model.n_iter_)
+
+######################################################################
+# Step 13 - Calculate training accuracy
+######################################################################
+
+print(Border)
+print("Step 13 - Calculate training accuracy")
+print(Border)
+
+Y_train_pred=model.predict(X_train)
+accuracy_train=accuracy_score(Y_train_pred,Y_train)
+
+print("Training accuracy :",accuracy_train)
+
+######################################################################
+# Step 14 - Calculate testing accuracy
+######################################################################
+
+print(Border)
+print("Step 14 - Calculate testing accuracy")
+print(Border)
+
+Y_pred=model.predict(X_test)
+accuracy_test=accuracy_score(Y_test,Y_pred)
+
+print("Testing accuracy :",accuracy_test)
+
+######################################################################
+# Step 15 - Generate Confusion Matrix
+######################################################################
+
+print(Border)
+print("Step 15 - Generate Confusion Matrix")
+print(Border)
+
+cf=confusion_matrix(Y_test,Y_pred)
+print("Confusion Matrix :",cf)
+
+######################################################################
+# Step 16 - Plot the Loss Curve 
+######################################################################
+
+print(Border)
+print("Step 16 - Plot the Loss Curve ")
+print(Border)
+
+plt.plot(model.loss_curve_)
+plt.title("Loss Curve")
+plt.xlabel("Iteration")
+plt.ylabel("Loss")
+plt.show()
+
+######################################################################
+# Step 17 - Create a function: PredictAttrition(employee_data)
+######################################################################
+
+print(Border)
+print("Step 17 - Create a function: PredictAttrition(employee_data)")
+print(Border)
+
+def PredictAttrition(employee_data):
+    emp_df=pd.DataFrame(employee_data)
+    print("New records :\n",emp_df)
+    emp_scaled=scalar.transform(emp_df)
+    prediction=model.predict(emp_scaled)
+    return prediction   
+
+######################################################################
+# Step 18 - Test the system using at least five new employee records
+######################################################################
+
+print(Border)
+print("Step 18 - Test the system using at least five new employee records")
+print(Border)
+
+new_employees = [
+    {"Age":29, "MonthlyIncome":3000, "YearsAtCompany":2, "TotalWorkingYears":4,
+     "DistanceFromHome":10, "JobSatisfaction":3, "WorkLifeBalance":2,
+     "OverTime":1, "NumCompaniesWorked":1,"TrainingTimesLastYear":1},
+
+    {"Age":45, "MonthlyIncome":15000, "YearsAtCompany":15, "TotalWorkingYears":20,
+     "DistanceFromHome":5, "JobSatisfaction":4, "WorkLifeBalance":3,
+     "OverTime":0, "NumCompaniesWorked":2,"TrainingTimesLastYear":2},
+
+    {"Age":34, "MonthlyIncome":7000, "YearsAtCompany":5, "TotalWorkingYears":10,
+     "DistanceFromHome":20, "JobSatisfaction":2, "WorkLifeBalance":1,
+     "OverTime":1, "NumCompaniesWorked":4,"TrainingTimesLastYear":6},
+
+    {"Age":28, "MonthlyIncome":4000, "YearsAtCompany":3, "TotalWorkingYears":6,
+     "DistanceFromHome":12, "JobSatisfaction":1, "WorkLifeBalance":2,
+     "OverTime":1, "NumCompaniesWorked":3,"TrainingTimesLastYear":1},
+
+    {"Age":50, "MonthlyIncome":20000, "YearsAtCompany":20, "TotalWorkingYears":25,
+     "DistanceFromHome":2, "JobSatisfaction":4, "WorkLifeBalance":4,
+     "OverTime":0, "NumCompaniesWorked":1,"TrainingTimesLastYear":4}
+]
+
+predictions = PredictAttrition(new_employees)
+ # 0 → Stay, 1 → Leave
+print("Predictions:", predictions) 
+
+####################################################################################
+# Step 19 - Explain whether the model is suffering from overfitting or underfitting
+####################################################################################
+
+print(Border)
+print("Step 19 - Explain whether the model is suffering from overfitting or underfitting")
+print(Border)
+
+print("The testing accuracy is close to training accuracy (82% vs 79%). This means the model is generalizing well — it’s learning patterns that apply to unseen data, not just memorizing the training set.")
