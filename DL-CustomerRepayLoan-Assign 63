@@ -1,0 +1,76 @@
+A bank provides personal loans to customers. Some customers fail to repay their loans.
+The bank wants to develop a Deep Learning system that predicts whether a new applicant has a high probability of defaulting on the loan.
+This prediction will help the bank assess risk before approving loans.
+
+Dataset
+Feature	        Description
+Age	            Applicant age
+Income	        Annual income
+LoanAmount	    Requested loan
+CreditScore	    Credit score
+EmploymentYears	Years employed
+ExistingLoans	  Number of existing loans
+MonthlyDebt	    Existing monthly debt
+LoanTerm	      Loan duration
+PreviousDefault	Yes/No
+HomeOwnership	  Rent/Own/Mortgage
+Default	0/1 —   Target
+
+
+Build:  
+Loan Default Prediction using Multi-Layer Perceptron
+
+Output:  
+0 → Low default risk
+1 → High default risk
+
+
+Tasks
+Load and understand the dataset.
+Perform exploratory analysis.
+Find missing values.
+Check whether the target classes are balanced.
+Encode categorical variables.
+Separate X and y.
+Split the dataset into training and testing data.
+Explain whether stratified splitting should be used.
+Scale the features.
+Create an MLPClassifier.
+Start with:
+python
+MLPClassifier(
+    hidden_layer_sizes=(32, 16),
+    activation='relu',
+    solver='adam',
+    max_iter=1000,
+    random_state=42
+)
+Train the model.
+Calculate accuracy.
+Generate the confusion matrix.
+Generate the classification report.
+Calculate precision, recall and F1-score.
+Plot training loss.
+Test the model on new loan applicants.
+Hyperparameter Experiment
+Change one parameter at a time.
+
+Experiment 1 — Activation
+identity
+logistic
+tanh
+relu
+
+Experiment 2 — Hidden Layers
+(10,)
+(20,10)
+(50,25)
+(100,50,25)
+
+Experiment 3 — Learning Rate
+Try different values for learning_rate_init.
+
+
+
+
+
