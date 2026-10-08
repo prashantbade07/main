@@ -70,7 +70,352 @@ Experiment 2 — Hidden Layers
 Experiment 3 — Learning Rate
 Try different values for learning_rate_init.
 
+########################################################################
+import pandas as pd 
+import numpy as np 
 
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score,confusion_matrix,classification_report,precision_score,recall_score,f1_score
+
+########################################################################
+Border="-"*50
+
+print(Border)
+print("A bank provides personal loans to customers. Some customers fail to repay their loans.The bank wants to develop a Deep Learning system that predicts whether a new applicant has a high probability of defaulting on the loan.This prediction will help the bank assess risk before approving loans.")
+
+########################################################################
+# Step 1 - Load and understand the dataset
+########################################################################
+
+print(Border)
+print("Step 1 - Load the dataset")
+print(Border)
+df=pd.read_csv("Loan_Default.csv")
+print("Data load successfully")
+
+########################################################################
+# Step 2 - Perform exploratory analysis
+########################################################################
+
+print(Border)
+print("Step 2 - Perform exploratory analysis")
+print(Border)
+
+print("First few records:\n",df.head())
+print("Columns are :",df.columns)
+print("Shape of dataset :",df.shape)
+
+########################################################################
+# Step 3 - Find missing values
+########################################################################
+
+print(Border)
+print("Step 3 - Find missing values")
+print(Border)
+
+print("Missing Values :",df.isnull().sum())
+
+########################################################################
+# Step 4 - Check whether the target classes are balanced
+########################################################################
+
+print(Border)
+print("Step 4 - Check whether the target classes are balanced")
+print(Border)
+
+print("Column which are numericals:")
+num_feature=df.select_dtypes(include=["number"]).columns.tolist()
+print(num_feature)
+print("Columns which are categorical:")
+cat_feature=df.select_dtypes(exclude=["number"]).columns.tolist()
+print(cat_feature)
+print("")
+print("Unique Values in PreviousDefault column: ",df["PreviousDefault"].unique().tolist())
+df["HomeOwnership"].unique()
+print("Unique Values in HomeOwnership column: ",df["HomeOwnership"].unique().tolist())
+print("")
+
+
+########################################################################
+# Step 5 - Encode categorical variables
+########################################################################
+
+print(Border)
+print("Step 5 - Encode categorical variables")
+print(Border)
+
+# df["PreviousDefault"]=df[""].map({
+#     "Yes":1,"No":0
+# })
+
+# One Hot Encoding requires since multi class category
+#This avoids multicollinearity when one column can be perfectly predicted from the others.
+
+df=pd.get_dummies(df,columns=["PreviousDefault","HomeOwnership"],drop_first=True)
+
+print("Encoded the categorical variables")
+print("")
+
+########################################################################
+# Step 6 - Separate X and Y
+########################################################################
+
+print(Border)
+print("Step 6 - Separate X and Y")
+print(Border)
+
+X=df.drop(columns=["Default"])
+Y=df["Default"]
+
+print("Separated features and labels")
+
+########################################################################
+# Step 7 - Split the dataset into training and testing data
+########################################################################
+
+print(Border)
+print("Step 7 - Split the dataset into training and testing data")
+print(Border)
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42)
+
+print("Training and testing dataset splitted")
+print("")
+
+########################################################################
+# Step 8 - Split the dataset into training and testing data
+########################################################################
+
+print(Border)
+print("Step 8 - Explain whether stratified splitting should be used")
+print(Border)
+
+print("Stratified splitting means that when we divide training and testing sets, the split preserves the same proportion of target classes in both sets training and testing")
+print("")
+
+########################################################################
+# Step 9 - Scale the features
+########################################################################
+
+print(Border)
+print("Step 9 - Scale the features")
+print(Border)
+
+scalar=StandardScaler()
+X_train=scalar.fit_transform(X_train)
+X_test=scalar.transform(X_test)
+
+print("Done the feature scaling")
+print("")
+
+########################################################################
+# Step 10 - Create an MLPClassifier
+########################################################################
+
+print(Border)
+print("Step 10 - Create an MLPClassifier")
+print(Border)
+
+model=MLPClassifier(
+    hidden_layer_sizes=(32,16),
+    activation='relu',
+    solver='adam',
+    max_iter=1000,
+    random_state=42
+)
+print("Created the model")
+print("")
+
+########################################################################
+# Step 11 - Train the model
+########################################################################
+
+print(Border)
+print("Step 11 - Train the model")
+print(Border)
+
+model=model.fit(X_train,Y_train)
+print("Trained the model")
+print("")
+
+########################################################################
+# Step 12 - Calculate accuracy
+########################################################################
+
+print(Border)
+print("Step 12 - Test the model")
+print(Border)
+
+Y_pred=model.predict(X_test)
+print("Accuracy is :",accuracy_score(Y_test,Y_pred))
+print("")
+
+########################################################################
+# Step 13 - Generate confusion Matrix
+########################################################################
+
+print(Border)
+print("Step 13 - Generate confusion Matrix")
+print(Border)
+
+cf=confusion_matrix(Y_test,Y_pred)
+print("Confusion Matrix :\n",cf)
+print("")
+
+#Row 1 (Actual class 0):
+#150 correctly predicted as 0 (True Negatives)
+#37 misclassified as 1 (False Positives)
+#Row 2 (Actual class 1)
+#30 misclassified as 0 (False Negatives)
+#23 correctly predicted as 1 (True Positives)
+
+########################################################################
+# Step 14 - Generate classification report
+########################################################################
+
+print(Border)
+print("Step 14 - Generate classification report")
+print(Border)
+
+cr=classification_report(Y_test,Y_pred)
+print("Classification Report :",cr)
+print("")
+
+########################################################################
+# Step 15 - Calculate precision,recall and F1-score
+########################################################################
+
+print(Border)
+print("Step 15 - Calculate precision,recall and F1-score")
+print(Border)
+
+print("Precision : ",precision_score(Y_test,Y_pred))
+print("Recall : ",recall_score(Y_test,Y_pred))
+print("F1 Score : ",f1_score(Y_test,Y_pred))
+print("")
+
+########################################################################
+# Step 16 - Plot training loss
+########################################################################
+
+print(Border)
+print("Step 16 - Plot training loss")
+print(Border)
+
+plt.plot(model.loss_curve_)
+plt.title("Training Loss Curve")
+plt.xlabel("Iterations")
+plt.ylabel("Loss")
+plt.show()
+
+print("Plotted the loss curve \n")
+
+########################################################################
+# Step 17 - Test the model on new loan applicants
+########################################################################
+
+print(Border)
+print("Step 17 - Test the model on new loan applicants")
+print(Border)
+
+new_applicants = pd.DataFrame({
+    "Age": [35, 50], # [0 pay,1 doesn't pay]
+    "Income": [60000, 12000],
+    "LoanAmount": [15000, 250000],
+    "CreditScore": [650, 720],
+    "EmploymentYears": [5, 20],
+    "ExistingLoans": [2, 1],
+    "MonthlyDebt": [500, 1000],
+    "LoanTerm": [36, 60],
+    "PreviousDefault": ["No", "Yes"],
+    "HomeOwnership": ["Mortgage", "Own"]
+})
+
+new_applicants=pd.get_dummies(new_applicants,columns=["PreviousDefault","HomeOwnership"],drop_first=True)
+new_applicants=new_applicants.reindex(columns=X.columns, fill_value=0)
+new_scaled=scalar.transform(new_applicants)
+prediction=model.predict(new_scaled)
+print("Predictions : ",prediction)
+
+########################################################################
+# Hyperparameter Experiment
+########################################################################
+# Step 18.1 - Experiment 1 - Activation Functions
+########################################################################
+
+print(Border)
+print("Step 18.1 - Experiment 1 - Activation Functions")
+print(Border)
+
+for act in ["identity","logistic","tanh","relu"]:
+    model=MLPClassifier(
+        hidden_layer_sizes=(32,16),
+        activation=act,
+        solver="adam",
+        max_iter=1000,
+        random_state=42
+    )
+    model.fit(X_train,Y_train)
+    Y_pred=model.predict(X_test)
+    print(f"Activation : {act}")
+    print("Accuracy :",accuracy_score(Y_test,Y_pred))
+    print("F1 Score :",f1_score(Y_test,Y_pred))
+    print("-"*50)
+
+print("")
+
+########################################################################
+# Step 18.2 - Experiment 2 - Hidden Layers
+########################################################################
+
+print(Border)
+print("Step 18.2 - Experiment 2 - Hidden Layers")
+print(Border)
+
+for layers in [(10,),(20,10),(50,25),(100,50,25)]:
+    model=MLPClassifier(
+        hidden_layer_sizes=layers,
+        activation="relu",
+        solver="adam",
+        max_iter=1000,
+        random_state=42
+    )
+    model.fit(X_train,Y_train)
+    Y_pred=model.predict(X_test)
+
+    print(f"Hidden Layers : {layers}")
+    print("Accuracy :",accuracy_score(Y_test,Y_pred))
+    print("F1 score :",f1_score(Y_test,Y_pred))
+    print("-"*50)
+print("")
+
+########################################################################
+# Step 18.3 - Experiment 3 - Learning Rate
+########################################################################
+
+print(Border)
+print("Step 18.3 - Experiment 3 - Learning Rate")
+print(Border)
+
+for lr in [0.0001,0.001,0.01,0.05]:
+    model=MLPClassifier(
+        hidden_layer_sizes=(32,16),
+        activation="relu",
+        solver="adam",
+        learning_rate_init=lr,
+        max_iter=1000,
+        random_state=42
+    )
+    model.fit(X_train,Y_train)
+    Y_pred=model.predict(X_test)
+    print(f"Learning Rate : {lr}")
+    print("Accuracy : ",accuracy_score(Y_test,Y_pred))
+    print("F1 score : ",f1_score(Y_test,Y_pred))
+    print("-"*50)
 
 
 
