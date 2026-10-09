@@ -1,0 +1,93 @@
+#################################################################
+1.Why Flatten Layer is Required Before Dense Layer
+#################################################################
+
+CNN output 3D feature maps(heights x width x channels)
+Dense layers expect 1D input vectors.
+The flattern layer reshapes the 3D tensor into 1D vector so it can connect to fully connected neurons.
+Example - 7 x 7 x 64 --> 3136 features
+
+#################################################################
+2. Fully Connected Layer in CNN
+#################################################################
+
+It is also called as Dense Layer.Every neuron is connected to all neurons in the previous layer.
+It combines extracted features to make final predictions (eg. classification).
+Acts like a traditional neural network layer after convolution and pooling.
+
+#################################################################
+3.Steps of CNN from Image Input to Final Prediction
+#################################################################
+
+Input Layer - Receives raw image pixels.
+Convolution Layer - Extracts local features using filter
+Activation (ReLU) - Introduces non linearity 
+Pooling Layer - Reduces spatial size and retain important features
+Flatten Layer - Convert 3D features maps to 1D vector.
+Fully Connected Layers - Learn complex relationships
+Output Layers - Produces final prediction (eg. class probabilities)
+
+#################################################################
+4.TensorFlow — Features
+#################################################################
+
+Open source deep learning framework by google
+Provides automatic differentiation, GPU acceleration and distributed training
+Provides Keras API for easy model building
+
+#################################################################
+5.Differentiate Scalar, Vector, Matrix, and Tensor
+#################################################################
+
+Type	         Description	          Example
+Scalar	       Single value	          𝑥=5
+Vector	       1D array	              [1,2,3]
+Matrix	       2D array	              [1 2
+                                      3  4]
+Tensor	     Multi-dimensional array	3D or higher, e.g., image data 28×28×3
+
+#################################################################
+6.Sequential Model in Keras
+#################################################################
+Simplest way to build models layer by layer
+Each layer has exactly one input and one output
+
+from tensorflow.keras.models import Sequential
+model=Sequential([Dense(32,activation='relu'),
+Dense(1,activation='sigmoid')])
+
+#################################################################
+7.Dense Layer in Keras
+#################################################################
+
+output=activation(W.x+b)
+Each neuron receives input from all neurons in the previous layer
+Used for classification or regression tasks
+
+#################################################################
+8.Code Using Sigmoid in Output Layer
+#################################################################
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+model=Sequential([Dense(32,activation='relu'),Dense(1,activation='sigmoid')])
+
+#################################################################
+9.Why Deep Learning Requires Large Datasets
+#################################################################
+
+Neural network have millions of parameters
+Large datasets help prevent overfitting and improve generalization
+More data allows the model to learn diverse patterns and reduce bias
+
+#################################################################
+10.Why GPUs Are Used in Deep Learning
+#################################################################
+
+GPU's perform parallel computation efficiently
+Ideal for matrix and tensor operations used in neural network
+Speed up training compared to CPU's
+Enable real time model experimentation and large scale learning
+
+#################################################################
