@@ -1,0 +1,87 @@
+########################################################################
+1.What is Convolution Layer? Explain in detail.
+########################################################################
+
+The core building block of a CNN. It applies a set of filters(kernels) that slide over the input image to extract features
+like edges,textures and patterns. Each filter performs a dot product between its weights and local region of the input,
+producing a feature map.
+This layers helps the network learn spatial hierarchies - low level features (edges) in early layers and high level
+features (faces,objects) in deeper layers.
+
+########################################################################
+2.What is kernel/filter in CNN?
+########################################################################
+
+A small matrix (eg. 3x3 or 5x5) of weights used to scan the input image.
+Each filter detects a specific pattern for example, one might detect vertical edges another horizontal edges.
+During training, the CNN learns the optimal filter values automatically.
+
+########################################################################
+3.What is feature map?
+########################################################################
+
+The output of applying a filter to the input.
+It shows where a particular feature (like an edge or texture) appears in the image.
+Multiple filters produce multiple features maps, stacked together to form next layers's input.
+
+########################################################################
+4.What is stride in convolution operation?
+########################################################################
+
+The number of pixels the filter moves each time it slides accross the image.
+Stride 1 - moves one pixel at a time (high detail).
+Stride 2 - skips pixels (reduces output size)
+Large stride - smaller output feature map,faster computation but less detail.
+
+########################################################################
+5.What is padding? Why padding is required?
+########################################################################
+
+Adding extra pixels (usually zero) around the image borders before convolution.
+Keeps output size the same as input
+Prevents loss of edge information
+Helps filter cover corner regions properly
+
+########################################################################
+6.What is pooling layer?
+########################################################################
+
+Reduces size of feature maps - less computation, avoids overfitting
+Keeps important features while discarding unnecessary details.
+Make the model more robust to small shifts or distoration in the image.
+
+########################################################################
+7.Explain types of pooling layers.
+########################################################################
+
+Max Pooling - takes max value in a region
+Average Pooling - take max value in a region
+Global Pooling - reduces entire feature map to a single value per channel
+
+########################################################################
+8.What is Max Pooling? Explain with example.
+########################################################################
+
+If a 2×2 patch is
+[2 5]
+[3 1]
+then Max Pooling outputs 5.
+It keeps the strongest activation — the most prominent feature.
+
+########################################################################
+9.What is Average Pooling? Explain with example.
+########################################################################
+
+For the same patch
+[2 5]
+[3 1]
+Average Pooling outputs the mean:
+(2+5+3+1)/4=2.75
+It smooths the representation, keeping average intensity.
+
+########################################################################
+10.What is Flatten layer?
+########################################################################
+
+Converts 2D feature maps into a 1D vector.
+Required before connecting to fully connected (dense) layers
