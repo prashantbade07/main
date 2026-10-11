@@ -14,6 +14,20 @@ Apply sigmoid activation function.
 Display final output.
 Explain whether output is close to 0 or 1.
 
+# Weighted Sum
+y=(x1 * w1) +(x2 * w2) + bias
+print("Weighted sum : ",round(y,4))
+
+# Sigmoid activation function
+act=1/(1+math.exp(-y))
+print("Final sigmoid activation output :",round(act,4))
+
+# Interpretation 
+if act>0.5:
+    print("Output closer to 1")
+else :
+    print("Output closer to 0")
+
 ###################################################################################################
 2: Write a Python program to demonstrate different activation functions.
 ###################################################################################################
@@ -27,6 +41,43 @@ Tasks:
 Accept input values from −10 to 10.
 Plot all activation functions using Matplotlib.
 Explain the use of each activation function.
+
+###############################################################
+import numpy as np 
+import matplotlib.pyplot as plt
+# Input values from -10 to 10 
+x=np.linspace(-10,10,200)
+
+# Sigmoid
+sigmoid=1/(1+np.exp(-x))
+
+# ReLU
+relu=np.maximum(0,x) 
+
+# Tanh
+tanh=np.tanh(x)
+
+plt.figure(figsize=(10,6))
+plt.plot(x,sigmoid,label='Sigmoid')
+plt.plot(x,relu,label='ReLU')
+plt.plot(x,tanh,label='Tanh')
+plt.legend()
+plt.title("Activation Function")
+plt.xlabel("Input")
+plt.ylabel("Output")
+plt.grid(True)
+plt.show()
+
+# Use and Limitation of Each Activation Function
+print("Sigmoid Use range(0,1) - Converts values into probabilites, commonly used in binary claasification output layers.")
+print("Sigmoid Limitation - Can cause vanishing gradients in deep networks")
+
+print("ReLU Use range[0,infinity) - Default choice for hidden layers in deep networks.Efficient, avoids vanishing gradient")
+print("ReLU Limitation - Dying problem neuron stuck at 0")
+
+print("Tanh range(-1,1) - Preferred in hidden layers when zero centered output are benefical.")
+print("Tanh Limitation - Still suffer from vanishing gradient but less than sigmoid")
+
 
 ###################################################################################################
 3: Write a Python program to calculate loss manually.
