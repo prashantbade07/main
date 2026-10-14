@@ -138,8 +138,8 @@ Y_pred2=model.predict(new_cust_scaled)
 print(Y_pred2)
 print("Prediction :", "Customer will Leave" if Y_pred2[0][0]>0.5 else "Customer will Stay")
 
-##########################################################
-Create a neural network model to predict loan approval.
+##################################################################################################
+2.Create a neural network model to predict loan approval.
 
 Features
 Applicant income
@@ -187,7 +187,93 @@ Test Input
 
 new_applicant = [[55000, 720, 400000, 10000, 1]]
 Expected Output
-Code
 Prediction: Loan Approved
 
-##################################################################################################3
+##################################################################################################
+import numpy as np 
+from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+########################################################
+# Step 1 - Load Data
+########################################################
+print("-"*50)
+print("Step 1 - Load Data")
+print("-"*50)
+
+X=np.array( [
+[25000, 600, 200000, 10000, 0],
+[40000, 700, 300000, 8000, 1],
+[60000, 750, 500000, 12000, 1],
+[20000, 550, 150000, 15000, 0],
+[80000, 800, 700000, 10000, 1],
+[35000, 650, 250000, 9000, 1],
+[18000, 500, 100000, 12000, 0],
+[90000, 850, 800000, 15000, 1],
+[30000, 580, 200000, 14000, 0],
+[70000, 780, 600000, 10000, 1]
+])
+
+Y=np.array([0, 1, 1, 0, 1,1, 0, 1, 0, 1])
+print("")
+
+########################################################
+# Step 2 - Feature Scaling
+########################################################
+print("-"*50)
+print("Step 2 - Feature Scaling")
+print("-"*50)
+
+scalar=StandardScaler()
+X_scaled=scalar.fit_transform(X)
+print("")
+
+########################################################
+# Step 3 - Build the Neural Network Model
+########################################################
+print("-"*50)
+print("Step 3 - Build the Neural Network Model")
+print("-"*50)
+
+model=Sequential([
+    Dense(8,activation='relu',input_shape=(X_scaled.shape[1],)),
+    Dense(4,activation='relu'),
+    Dense(1,activation='sigmoid')]
+)
+model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
+print("")
+
+########################################################
+# Step 4 - Train the Neural Network Model
+########################################################
+print("-"*50)
+print("Step 4 - Train the Neural Network Model")
+print("-"*50)
+
+model.fit(X_scaled,Y,epochs=50,verbose=0)
+print("")
+
+########################################################
+# Step 5 - Evaluate Model
+########################################################
+print("-"*50)
+print("Step 5 - Evaluate the Model")
+print("-"*50)
+
+loss,acc=model.evaluate(X_scaled,Y,verbose=0)
+print(f"Accuracy :{acc:.2f}")
+
+########################################################
+# Step 6 - Predict new applicant
+########################################################
+print("-"*50)
+print("Step 6 - Predict new applicant")
+print("-"*50)
+
+new_applicant = np.array([[55000, 720, 400000, 10000, 1]])
+new_applicant_scaled=scalar.transform(new_applicant)
+prediction=model.predict(new_applicant_scaled)
+print(prediction)
+print("Prediction :","Loan Approved" if prediction>0.5 else "Loan Rejected")
+
