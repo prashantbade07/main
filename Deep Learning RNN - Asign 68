@@ -1,0 +1,52 @@
+#############################################################################################
+1.Explain the concept of Recurrent Neural Network. Describe why RNN is more suitable than 
+traditional neural networks for sequential data.
+
+RNN are neural network designed to handle sequential data (eg.time,series,text,speech).
+They have loops that allow information to persist-meaning the output at time t depends on both the current input 
+and previous hidden states.
+Traditional feedforward networks treat inputs independtly, while RNN capture temporal dependencies and context across sequences.
+
+#############################################################################################
+2.Differentiate between ANN, FNN, CNN, and RNN in terms of architecture and practical applications.
+
+Model	                                Architecture	                      Practical Applications
+
+ANN (Artificial Neural Network)	      Fully connected layers;             General classification/regression tasks
+                                      no spatial or temporal structure	
+
+FNN (Feedforward Neural Network)	    Data flows one way (no loops)	      Tabular data, simple predictions
+
+CNN (Convolutional Neural Network)	  Convolution + pooling layers;       Image recognition, video analysis
+                                      captures spatial patterns
+                
+RNN (Recurrent Neural Network)	      Recurrent connections;              Text generation, speech recognition,
+                                      captures temporal patterns	        time-series forecasting
+
+#############################################################################################
+3.Explain the meaning of sequence data. Mention examples where sequence order is important.
+
+Sequence Data - Data where order matters - each element depends on previous ones.
+Sentences (word order affects meaning)
+Stock prices (past trends influence future values)
+Sensor readings (time dependent patterns)
+
+#############################################################################################
+4.Describe the architecture of a basic RNN model. Explain input layer, hidden state, recurrent connection, 
+output layer, and activation functions.
+
+Input Layer - Recevies sequence data (eg. words,time steps)
+Hidden State - Stores information from previous steps - acts as memory
+Recurrent Connection - Links hidden states across time steps
+Output Layer - Produces predictions (eg. next word,class label)
+Activation Functions - Commonly tanh, ReLU for hidden layers, softmax for output
+
+ht=f(Wx * xt + Wh * ht-1 + b)
+ht - hidden state at time t
+
+#############################################################################################
+5.Explain why memory is important in RNN models
+
+Memory allows RNN to retain context from previous inputs.
+It helps in understanding long term dependencies eg predicting the next word in a sentence based on earlier words.
+Without memory, the model would treat each input independently,losing sequence meaning.
