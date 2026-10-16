@@ -1,0 +1,36 @@
+###########################################################################################
+1.Explain hidden state in RNN. Describe how hidden state stores previous information.
+
+The hidden state ℎ𝑡 is the internal memory of an RNN that captures information from previous timesteps
+It stores context by combining the current input 𝑥𝑡 and the previous hidden state ℎ𝑡−1
+Each new hidden state depends on both the current input and the past hidden state,enabling the network to 'remember'
+prior information across time.
+
+###########################################################################################
+2.Explain how an RNN reads the sentence word by word using time steps.
+Example:  
+food was not good
+
+###########################################################################################
+3.Write the mathematical formula of SimpleRNN hidden state calculation and explain every term.
+ℎ𝑡=tanh(𝑊𝑥𝑡+𝑊ℎ𝑡−1+𝑏)
+
+###########################################################################################
+4.Explain the role of input vector, previous hidden state, weights, and bias in RNN.
+
+###########################################################################################
+5.Explain why sequence order matters in RNN models.
+
+###########################################################################################
+6.Explain why tanh is commonly used in SimpleRNN layers.
+
+###########################################################################################
+7.Calculate tanh output for the following values:−2,−1,0,1,2
+
+###########################################################################################
+8.Explain why sigmoid is used in the output layer for binary sentiment analysis.
+
+
+
+
+
