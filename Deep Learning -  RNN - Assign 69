@@ -11,26 +11,58 @@ prior information across time.
 Example:  
 food was not good
 
+RNN process sequences one word at a time using timesteps
+For the sentence "food was not good"
+
+At 𝑡1:input ="food", output =ℎ1
+At 𝑡2:input ="was", output =ℎ2(depends on ℎ1)
+At 𝑡3:input ="not", output =ℎ3(depends on ℎ2)
+At 𝑡4:input ="good", output =ℎ4(depends on ℎ3)
+
+This sequential dependency allows the model to understand context and word order.
+
 ###########################################################################################
 3.Write the mathematical formula of SimpleRNN hidden state calculation and explain every term.
 ℎ𝑡=tanh(𝑊𝑥𝑡+𝑊ℎ𝑡−1+𝑏)
 
+𝑥𝑡-Input vector at time t
+W-Weight matrix for input
+𝑊ℎ𝑡−1-Previous hidden state
+b-bias
+tanh-Activation function that introduces non linearity and keeps values between -1 and 1
+
 ###########################################################################################
 4.Explain the role of input vector, previous hidden state, weights, and bias in RNN.
+
+Input vector xt - Represent current data point(eg.word embedding)
+Previous Hidden State ℎ𝑡−1 - Carries memory from earlier steps
+Weights W - Learn how input and past states interact
+Bias b - Shift activation to improve learning flexibility
 
 ###########################################################################################
 5.Explain why sequence order matters in RNN models.
 
+RNNs are order sensitive because each hidden state depends on previous ones.
+Changinh word order changes meaning (eg not good != good not)
+The temporal structure defines context, crucial tasks like traslation or sentiment analysis.
+
 ###########################################################################################
 6.Explain why tanh is commonly used in SimpleRNN layers.
+
+Range - Outputs between -1 and 1, stabilizing gradients
+Centering - Zero centered, helping faster convergence.
+Smoothness - Provides continous gradients for backpropation through time.
 
 ###########################################################################################
 7.Calculate tanh output for the following values:−2,−1,0,1,2
 
+tanh(x)=ex−e−x/ex+e−x​
 ###########################################################################################
 8.Explain why sigmoid is used in the output layer for binary sentiment analysis.
 
-
+Range - Output between 0 and -1 interpretable as probability
+Purpose - Convert logits into probabilities for binary classification (positive vs negative sentiment)
+Example - Output>0.5 positive , <0.5 negative
 
 
 
