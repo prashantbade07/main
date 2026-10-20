@@ -1,0 +1,25 @@
+#####################################################################################
+1.Explain why RNN is widely used in Natural Language Processing.
+
+
+#####################################################################################
+2.Describe the complete pipeline of sentiment analysis using RNN.
+
+#####################################################################################
+3.Explain tokenization with suitable example.
+
+#####################################################################################
+4.Explain padding and why equal sequence length is required.
+
+#####################################################################################
+5.Explain vocabulary size and how tokenizer creates word index.
+
+#####################################################################################
+6.Explain embedding layer and why token IDs are not enough for deep learning.
+
+#####################################################################################
+7.Differentiate between one-hot encoding and embedding vectors.
+
+#####################################################################################
+8.Explain how the sentence below is processed by RNN:
+"food was not good"
