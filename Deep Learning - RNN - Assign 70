@@ -1,9 +1,57 @@
 #####################################################################################
 1.Explain why RNN is widely used in Natural Language Processing.
 
+RNN designed to handle sequential data, making it suitable for NLP tasks where the order of words matters/
+Why RNN ?
+1.Capture word sequence - Sentence meaning depends on word order
+Eg. Dog bites man. --> Man bites dog Same word  different meanings
+2.Maintains memory of previous words
+RNN uses a hidden state to remember earlier information
+Useful for understanding context
+3.Handles variable length input
+Sentences can have different number of words
+4.Suitable for NLP tasks
+Sentiment Analysis, Text classification,Speech Recognition
+
+Eg. I don't like movie RNN remember not while reading later words, helping correct sentiment.
 
 #####################################################################################
 2.Describe the complete pipeline of sentiment analysis using RNN.
+
+Step 1 - Collect the Data
+Eg Food was good --> Positive 
+   Food was bas  --> Negative
+
+Step 2 - Convert  to lowecase, remove unwanted symbols
+eg "Food was good !!"
+becomes "food was good"
+
+Step 3 - Tokkenization 
+Split text into words
+food was good
+["food","was","good"]
+
+Step 4 - Create Vocabulary
+food -> 1
+was  -> 2
+good -> 3
+bad  -> 4
+
+Step 5 - Convert words to intergers
+food was good --> [1,2,3]
+
+Step 6 - Padding 
+Make all sequences equal length 
+[1,2,3] -> [0,1,2,3]
+
+Step 7 - Embedding Layer
+Convert IDs into dense vectors
+1->[0.2,0.7,-0.1]
+2->[0.3,0.1,0.8]
+3->[0.5,-0.2,0.4]
+
+Step 8 - RNN Processing
+RNN reads one word at a time and updates hidden state1`
 
 #####################################################################################
 3.Explain tokenization with suitable example.
